@@ -6,11 +6,11 @@ class DroneService {
     
     constructor(){
         this.app = express()
+        this.initializeRoutes()
     }
    
     //starts the server on a given port
     start = (port: Number) => { 
-        this.initializeRoutes()
         return this.app.listen(port, () => {
             console.log(`Drone service running on port ${port}`);
         });
