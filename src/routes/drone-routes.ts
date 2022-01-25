@@ -1,5 +1,6 @@
 import { BaseRoute } from "../helpers/base-route";
 import  {Request,Response,Application} from "express";
+import DroneController from "../controllers/drone-controller"
 
 export default class DroneRoutes extends BaseRoute {
    
@@ -13,9 +14,9 @@ export default class DroneRoutes extends BaseRoute {
               const response = "drones.....";
               return res.send(response);
         })
-        .post(async(req:Request, res:Response)=>{
-            const response = "drone created";
-            return res.send(response);
+        .post(async(req:Request, res:Response,next:any)=>{
+                const response = await DroneController.create(req);
+                return res.send(response)
         })
         .put(async(req:Request, res:Response)=>{
             const response = "drone updated";

@@ -10,19 +10,23 @@ describe("DroneRoutes", ()=>{
     describe("POST /",()=>{
       
         const validDroneData = {
-            name: "Shadow",
-            weight: 2.7,
-            code: "TK_900"
+            serialNumber:"7474848484",
+            model:"Lightweight",
+            weight:45,
+            battery:0.9,
+            state:"LOADING"
         }
 
         const inValidDroneData = {
-            name: "Shadow",
-            weight: 2.7,
-            code: "tk-900"
+            serialNumber:"7474848484",
+            model:"Lightweight",
+            weight:45000, //Weight greater than upper Limit
+            battery:0.9,
+            state:"LOADING"
         }
         
         it("Should Create A Drone and Return It",async ()=>{
-             const response = await request.get("/drones").send(validDroneData)
+             const response = await request.post("/drones").send(validDroneData)
              expect(response.statusCode).toBe(201)
              expect(response.body).toEqual(
                  expect.objectContaining({
