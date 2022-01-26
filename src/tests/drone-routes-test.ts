@@ -46,12 +46,16 @@ describe("DroneRoutes", ()=>{
         })
         
         it("Should Return a 400 validation error",async ()=>{
-            const response = await request.get("/drones").send(inValidDroneData)
+            const response = await request.post("/drones").send(inValidDroneData)
             expect(response.statusCode).toBe(400)
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    message: expect.any(String)
-                })
+            expect(response.body.errors).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        message: expect.any(String),
+                        field: "weight"
+                    })
+                ])
+               
             )
         })
     })    
