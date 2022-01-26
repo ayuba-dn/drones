@@ -9,6 +9,30 @@ interface DroneModel extends mongoose.Model <DroneDoc>{
 interface DroneDoc extends mongoose.Document{
 
 }
+
+const MedicationSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        maxLength: 100
+    },
+    weight: {
+        type: String,
+        required: true
+    },
+    code: {
+        type: Number,
+        required: true,
+        max: 500
+    },
+    image: {
+        type: String,
+        required: true
+    }
+})
+
+const Medication = mongoose.model('Medication',MedicationSchema)
+
 const droneSchema = new mongoose.Schema({
     serialNumber: {
         type: String,
@@ -32,6 +56,10 @@ const droneSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING']
+    },
+    medications: {
+        type: [],
+        default: []
     }
 })
 

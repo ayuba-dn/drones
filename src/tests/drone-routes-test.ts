@@ -14,8 +14,8 @@ describe("DroneRoutes", ()=>{
         const dbPassword = process.env.DB_PASSWORD || 'xc892zx22';
         const dbUrl: string = `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?authSource=${authDbName}`
         DroneApp.connectDb(dbUrl)
-    describe("POST /",()=>{
-      
+
+    describe("POST /drones",()=>{
         const validDroneData = {
             serialNumber:"7474848484",
             model:"Lightweight",
@@ -58,7 +58,59 @@ describe("DroneRoutes", ()=>{
                
             )
         })
-    })    
+    })  
+    
+    describe("PUT /drones/:droneId/load",()=>{
+        
+        const droneId = '61f0f9e79531a1e3d542ec4e'
+        
+        const validMedicationData = {
+            name:"Sierra 243",
+            weight:100,
+            code:"X244",
+            image:'xyz.png'
+        }
+
+        const inValidMedicationData = {
+            name:"Sierra 243",
+            weight:100,
+            code:"rr244", //Invalid
+            image:'xyz.png'
+        }
+        
+        it("Should Load A Drone WIth Medication and Return It",async ()=>{
+             const response = await request.put(`/drones/${droneId}/load`).send(validMedicationData)
+             expect(response.statusCode).toBe(200)
+             expect(response.body).toEqual(
+                 expect.objectContaining({
+                     medications: expect.arrayContaining([
+                         expect.objectContaining({
+                            name: expect.any(String)
+                         })
+                        ])
+                 })
+             )
+             
+        })
+
+        it("Should Return Validation Error",async ()=>{
+            const response = await request.put(`/drones/${droneId}/load`).send(inValidMedicationData)
+            expect(response.statusCode).toBe(200)
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    medications: expect.arrayContaining([
+                        expect.objectContaining({
+                           name: expect.any(String)
+                        })
+                       ])
+                })
+            )
+            
+         })
+        
+        
+    })  
+
 
     describe("GET /",()=>{
         it("Should Return An Object Containing all Drones or an Empty array",async ()=>{
