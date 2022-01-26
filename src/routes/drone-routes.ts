@@ -2,7 +2,8 @@ import { BaseRoute } from "../helpers/base-route";
 import  {Request,Response,Application} from "express";
 import DroneController from "../controllers/drone-controller"
 import {validationResult} from 'express-validator'
-import droneValidator from "../helpers/validators/drone-validator"
+import droneValidator  from "../helpers/validators/drone-validator"
+import medicationValidator  from "../helpers/validators/medication-validator"
 import {RequestValidationError } from '../helpers/errors/request-validation-error'
 import {BadRequestError } from '../helpers/errors/bad-request-error'
 
@@ -43,6 +44,24 @@ export default class DroneRoutes extends BaseRoute {
         .delete(async(req:Request, res:Response)=>{
             const response = "drone deleted";
             return res.send(response);
+        })
+
+
+        this.app.route("/drones/:droneId/load")
+        .put(medicationValidator,(req:Request,res:Response)=>{
+            const errors = validationResult(req)
+            if(!errors.isEmpty()){
+                let errorsData: any = errors.array()
+                throw new RequestValidationError(errorsData)
+            }
+
+            DroneController.load(req)
+            .then(drone=>{
+                return res.status(200).send(drone)
+            })
+            .catch(error=>{
+                throw new BadRequestError(error)
+            })
         })
 
         

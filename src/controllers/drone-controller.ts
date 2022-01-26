@@ -10,6 +10,11 @@ class DroneController {
             return DroneRepository.create(req.body)
     }
 
+    public load = (req:Request): Promise<DroneDoc | null> =>{
+        console.log(req.body)
+       return DroneRepository.load(req.body,req.params.droneId)
+    }
+
     public async getDrones(): Promise<DroneDoc[]> {
        return DroneRepository.getAll();
     }
