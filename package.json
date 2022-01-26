@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
-    "dev": "ts-node-dev --poll src/index.ts",
+    "start": "ts-node-dev --poll src/index.ts",
     "build": "tsc"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://gitlab.com/musala-coding-tasks-solutions/ayuba-dauda#readme",
   "dependencies": {
+    "@types/node": "^17.0.12",
     "dotenv": "^14.3.0",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
