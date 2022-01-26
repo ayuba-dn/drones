@@ -20,7 +20,7 @@ import {body} from 'express-validator'
     body('code')
     .isString()
     .notEmpty()
-    .matches(/^[A-Za-z0-9  _]+$/)
+    .matches(/^[A-Z0-9  _]+$/)
     .withMessage("Please enter a valid name allowed only letters, numbers, and underscore"),
 
     body('image')

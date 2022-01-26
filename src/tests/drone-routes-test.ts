@@ -95,15 +95,13 @@ describe("DroneRoutes", ()=>{
 
         it("Should Return Validation Error",async ()=>{
             const response = await request.put(`/drones/${droneId}/load`).send(inValidMedicationData)
-            expect(response.statusCode).toBe(200)
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    medications: expect.arrayContaining([
-                        expect.objectContaining({
-                           name: expect.any(String)
-                        })
-                       ])
-                })
+            expect(response.statusCode).toBe(400)
+            expect(response.body.errors).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        field: "code"
+                    })
+                ])
             )
             
          })
@@ -117,13 +115,14 @@ describe("DroneRoutes", ()=>{
              const response = await request.get("/drones")
              expect(response.statusCode).toBe(200)
              expect(response.body).toEqual(
-                expect.arrayContaining(
+                expect.arrayContaining([
                     expect.objectContaining(
                         {
                          name: expect.any(String)
                         }
                     )
-                ) || []
+                ]) || []   
+                     
              )
         })
     })    
