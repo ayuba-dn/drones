@@ -26,7 +26,7 @@ describe("DroneRoutes", ()=>{
         }
         
         it("Should Create A Drone and Return It",async ()=>{
-             const response = await request.post("/drones").send(validDroneData)
+             const response = await request.post("/drones").send({body:validDroneData})
              expect(response.statusCode).toBe(201)
              expect(response.body).toEqual(
                  expect.objectContaining({
