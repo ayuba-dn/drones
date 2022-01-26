@@ -22,7 +22,7 @@ const droneSchema = new mongoose.Schema({
     weight: {
         type: Number,
         required: true,
-        max: 100
+        max: 500
     },
     battery: {
         type: Number,

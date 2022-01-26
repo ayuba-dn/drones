@@ -27,7 +27,7 @@ describe("DroneRoutes", ()=>{
         const inValidDroneData = {
             serialNumber:"7474848484",
             model:"Lightweight",
-            weight:45000, //Weight greater than upper Limit
+            weight:45000, 
             battery:0.9,
             state:"LOADING"
         }
