@@ -14,9 +14,10 @@ const dbPassword = process.env.DB_PASSWORD || 'xc892zx22';
 const dbUrl: string = `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?authSource=${authDbName}`
 
 console.log("connection url>>",dbUrl)
-//Start Service
-DroneService.start(port); 
+
 
 //Connect to Database
 DroneService.connectDb(dbUrl)
 
+//Start Service
+DroneService.start(port); 

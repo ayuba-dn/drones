@@ -7,6 +7,7 @@ class DroneService {
     
     constructor(){
         this.app = express()
+        this.app.use(express.json())
         this.initializeRoutes()
     }
    

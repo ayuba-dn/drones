@@ -6,7 +6,14 @@ const app: Application = DroneApp.getAppInstance()
 const request = supertest(app)
 
 describe("DroneRoutes", ()=>{
-
+        const dbHost = process.env.DB_HOST || 'localhost';
+        const dbPort = process.env.DB_PORT || '27017';
+        const dbName = process.env.DB_NAME || 'drones';
+        const authDbName = process.env.AUTH_DB_NAME || 'admin';
+        const dbUser = process.env.DB_USER || 'droneuser';
+        const dbPassword = process.env.DB_PASSWORD || 'xc892zx22';
+        const dbUrl: string = `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?authSource=${authDbName}`
+        DroneApp.connectDb(dbUrl)
     describe("POST /",()=>{
       
         const validDroneData = {
@@ -26,13 +33,13 @@ describe("DroneRoutes", ()=>{
         }
         
         it("Should Create A Drone and Return It",async ()=>{
-             const response = await request.post("/drones").send({body:validDroneData})
+             const response = await request.post("/drones").send(validDroneData)
              expect(response.statusCode).toBe(201)
              expect(response.body).toEqual(
                  expect.objectContaining({
-                     name: expect.any(String),
+                     model: expect.any(String),
                      weight: expect.any(Number),
-                     code: expect.any(String)
+                     serialNumber: expect.any(String)
                  })
              )
              

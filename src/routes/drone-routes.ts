@@ -16,7 +16,7 @@ export default class DroneRoutes extends BaseRoute {
         })
         .post(async(req:Request, res:Response,next:any)=>{
                 const response = await DroneController.create(req);
-                return res.send(response)
+                return res.status(201).send(response)
         })
         .put(async(req:Request, res:Response)=>{
             const response = "drone updated";

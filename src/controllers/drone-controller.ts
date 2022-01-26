@@ -6,6 +6,7 @@ import {Request} from "express"
 class DroneController {
     
     public create = (req:Request): Promise<DroneDoc> =>{
+             console.log(req.body)
             return DroneRepository.create(req.body)
     }
 
