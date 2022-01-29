@@ -14,7 +14,6 @@ pipeline {
            steps {
                script {         
                     def customImage = docker.build('computer14/drones', ".")
-                    withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ])
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                          customImage.push("${env.BUILD_NUMBER}")
                     }                     
