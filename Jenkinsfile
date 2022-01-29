@@ -18,8 +18,20 @@ pipeline {
                          customImage.push("${env.BUILD_NUMBER}")
                     }                     
                }
+            }
+	    }
+
+
+        stage('Push to k8 ') {
+            steps {           
+                        sh 'pwd'
+                        sh 'cp -R helm/* .'
+		                sh 'ls -ltr'
+                        sh 'pwd'
+                        sh '/usr/local/bin/helm upgrade --install drones-app drones  --set image.repository=registry.hub.docker.com/computer14/drones --set image.tag=latest'
+              			
+            }           
         }
-	  }
    
 }
 }
