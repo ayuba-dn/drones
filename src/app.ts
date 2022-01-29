@@ -19,7 +19,7 @@ class DroneService {
     //starts the server on a given port
     start = (port: Number) => { 
         return this.app.listen(port, () => {
-            console.log(`Drone service is running on the port ${port}`);
+            console.log(`Drone service is running on port >>>> ${port}`);
         });
     }
     //add all routes to the App here
@@ -48,6 +48,7 @@ class DroneService {
             console.log("Connected to database")
         }
         catch(error){
+            console.log("Error Connecting to database",error)
             throw new DatabaseConnectionError("Error Connecting DB")
         }
     }

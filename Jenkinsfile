@@ -2,15 +2,15 @@ pipeline {
   agent any
     
     stages {
-         stage('Deploy mongodb ') {
-            steps {    
-                          sh 'pwd'
-                          sh 'cp -R helm-deployment/* .'
-		                  sh 'ls -ltr'
-                          sh 'pwd'
-                          sh '/usr/local/bin/helm upgrade --install mongodb ./mongodb'
-            }           
-        }
+        //  stage('Deploy mongodb ') {
+        //     steps {    
+        //                   sh 'pwd'
+        //                   sh 'cp -R helm-deployment/* .'
+		    //               sh 'ls -ltr'
+        //                   sh 'pwd'
+        //                   sh '/usr/local/bin/helm upgrade --install mongodb ./mongodb'
+        //     }           
+        // }
 
         stage('Build Typescript to js') {
             steps { 
