@@ -28,7 +28,7 @@ pipeline {
                         sh 'cp -R helm-deployment/* .'
 		                sh 'ls -ltr'
                         sh 'pwd'
-                        sh '/usr/local/bin/helm upgrade --install drones-app .  --set image.repository=registry.hub.docker.com/computer14/drones --set image.tag=latest'
+                        sh '/usr/local/bin/helm upgrade --install drones-app .  --set image.repository=registry.hub.docker.com/computer14/drones --set image.tag=16'
               			
             }           
         }
