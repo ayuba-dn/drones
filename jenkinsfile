@@ -10,7 +10,7 @@ pipeline {
         }
         
          
-        stage('Build docker image') {
+        stage('Build docker Image') {
            steps {
                script {         
                     def customImage = docker.build('ayuba-dn/drones', ".")
