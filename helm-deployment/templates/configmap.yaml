@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: drones-configmap
+data:
+  PORT: "{{ .Values.PORT }}"
+  DB_HOST: {{ .Values.applicationConfig.DB_HOST }}
+  DB_PORT: "{{ .Values.applicationConfig.DB_PORT }}"
+  DB_NAME: {{ .Values.applicationConfig.DB_NAME }}
+  DB_USER: {{ .Values.applicationConfig.DB_USER }}   
+  DB_PASSWORD: {{ .Values.applicationConfig.DB_PASSWORD }}
+  AUTH_DB_NAME: {{ .Values.applicationConfig.AUTH_DB_NAME }}
+  
+
+
+  
+
+
+ 
