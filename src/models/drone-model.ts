@@ -7,7 +7,11 @@ interface DroneModel extends mongoose.Model <DroneDoc>{
 }
 
 interface DroneDoc extends mongoose.Document{
-
+   serialNumber: string,
+   model:string,
+   weight:number,
+   battery: number,
+   medications: []
 }
 
 const MedicationSchema = new mongoose.Schema({

@@ -13,7 +13,7 @@ const dbPassword = process.env.DB_PASSWORD || 'xc892zx22';
 
 const dbUrl: string = `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?authSource=${authDbName}`
 
-console.log("connection url>>",dbUrl)
+console.log("connectionssss url>>",dbUrl)
 
 
 //Connect to Database

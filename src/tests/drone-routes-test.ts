@@ -6,9 +6,10 @@ const app: Application = DroneApp.getAppInstance()
 const request = supertest(app)
 
 describe("DroneRoutes", ()=>{
+        var droneId: string
         const dbHost = process.env.DB_HOST || 'localhost';
         const dbPort = process.env.DB_PORT || '27017';
-        const dbName = process.env.DB_NAME || 'drones';
+        const dbName = process.env.DB_NAME || 'test_drones';
         const authDbName = process.env.AUTH_DB_NAME || 'admin';
         const dbUser = process.env.DB_USER || 'droneuser';
         const dbPassword = process.env.DB_PASSWORD || 'xc892zx22';
@@ -42,7 +43,9 @@ describe("DroneRoutes", ()=>{
                      serialNumber: expect.any(String)
                  })
              )
-             
+            
+            
+              droneId = response.body._id
         })
         
         it("Should Return a 400 validation error",async ()=>{
@@ -62,7 +65,7 @@ describe("DroneRoutes", ()=>{
     
     describe("PUT /drones/:droneId/load",()=>{
         
-        const droneId = '61f0f9e79531a1e3d542ec4e'
+        //const droneId = '61f0f9e79531a1e3d542ec4e'
         
         const validMedicationData = {
             name:"Sierra 243",
@@ -77,6 +80,14 @@ describe("DroneRoutes", ()=>{
             code:"rr244", //Invalid
             image:'xyz.png'
         }
+        let lowWeightDroneData = {
+            serialNumber:"7474848484",
+            model:"Lightweight",
+            weight:45,
+            battery:0.9,
+            state:"LOADING"
+        }
+        
         
         it("Should Load A Drone WIth Medication and Return It",async ()=>{
              const response = await request.put(`/drones/${droneId}/load`).send(validMedicationData)
@@ -93,13 +104,28 @@ describe("DroneRoutes", ()=>{
              
         })
 
-        it("Should Return Validation Error",async ()=>{
-            const response = await request.put(`/drones/${droneId}/load`).send(inValidMedicationData)
+        it("Drone with weight exceeded Validation Error",async ()=>{
+            const drone = await request.post("/drones").send(lowWeightDroneData)
+            let lowWeightDroneId = drone.body._id
+            const response = await request.put(`/drones/${lowWeightDroneId}/load`).send(validMedicationData)
             expect(response.statusCode).toBe(400)
             expect(response.body.errors).toEqual(
                 expect.arrayContaining([
                     expect.objectContaining({
-                        field: "code"
+                        message: "the weight is beyond what this drone can carry"
+                    })
+                ])
+            )
+            
+         })
+
+         it("Drone With Low Battery Validation Error",async ()=>{
+            const response = await request.put(`/drones/${droneId}/load`).send(validMedicationData)
+            expect(response.statusCode).toBe(400)
+            expect(response.body.errors).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        message: "drone battery is low, please recharge and try again"
                     })
                 ])
             )
@@ -110,15 +136,15 @@ describe("DroneRoutes", ()=>{
     })  
 
 
-    describe("GET /",()=>{
-        it("Should Return An Object Containing all Drones or an Empty array",async ()=>{
+    describe("GET /drones/available",()=>{
+        it("Should Return all Availble Drones or an Empty array",async ()=>{
              const response = await request.get("/drones")
              expect(response.statusCode).toBe(200)
              expect(response.body).toEqual(
                 expect.arrayContaining([
                     expect.objectContaining(
                         {
-                         name: expect.any(String)
+                         state: 'IDLE'
                         }
                     )
                 ]) || []   

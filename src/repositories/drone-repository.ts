@@ -16,8 +16,8 @@ class DroneRepository {
         return Drone.find({});
      }
 
-     findOne = async (param:{}): Promise<DroneDoc | null>=> {  
-        return Drone.findOne(param);
+     findOne = async (droneId:string): Promise<DroneDoc | null>=> {  
+        return Drone.findById(droneId)
      }
 
 
