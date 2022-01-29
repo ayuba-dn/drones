@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: www.aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com
+    - host: aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com
       http:
         paths:
           - path: /
