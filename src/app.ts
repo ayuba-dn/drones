@@ -19,7 +19,7 @@ class DroneService {
     //starts the server on a given port
     start = (port: Number) => { 
         return this.app.listen(port, () => {
-            console.log(`Drone service is running on port ${port}`);
+            console.log(`Drone service is running on the port ${port}`);
         });
     }
     //add all routes to the App here
