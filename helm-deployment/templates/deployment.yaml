@@ -38,7 +38,7 @@ spec:
               name: drones-configmap
           ports:
             - name: http
-              containerPort: "{{ .Values.applicationConfig.PORT }}"
+              containerPort: {{ .Values.applicationConfig.PORT }}
               protocol: TCP
           livenessProbe:
             httpGet:
