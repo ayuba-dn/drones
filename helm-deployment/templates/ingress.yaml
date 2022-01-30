@@ -12,7 +12,7 @@ spec:
         backend:
           serviceName: drones-app-helm-deployment
           servicePort: 4000
-       - path: /
+      - path: /
         backend:
           serviceName: greyfoods-api-lamp
           servicePort: 80
