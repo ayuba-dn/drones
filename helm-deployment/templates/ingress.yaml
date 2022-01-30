@@ -5,19 +5,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - host: aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com
       http:
         paths:
-          - path: /task(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: drones-app-helm-deployment
-                port:
-                  number: 4000
           - path: /
             pathType: Prefix
             backend:
@@ -25,6 +17,14 @@ spec:
                 name: greyfoods-api-lamp
                 port:
                   number: 80
+          - path: /task(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: drones-app-helm-deployment
+                port:
+                  number: 4000
+         
                   
           
      
