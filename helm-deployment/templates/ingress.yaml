@@ -21,7 +21,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: greyfoods-api-lamp-7877fb76bf-7ljjs
+                name: greyfoods-api-lamp
                 port:
                   number: 80
      
