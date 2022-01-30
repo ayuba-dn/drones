@@ -17,13 +17,7 @@ spec:
                 name: greyfoods-api-lamp
                 port:
                   number: 80
-          - path: /task(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: drones-app-helm-deployment
-                port:
-                  number: 4000
+         
          
                   
           
