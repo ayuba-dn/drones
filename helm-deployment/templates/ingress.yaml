@@ -11,7 +11,6 @@ spec:
       http:
         paths:
           - path: /task(/|$)(.*)
-            pathType: Prefix
             backend:
               service:
                 name: drones-app-helm-deployment
