@@ -14,14 +14,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: drones-app-helm-deployment
-                port:
-                  number: 4000
-          - path: /v1(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
                 name: greyfoods-api-lamp
                 port:
                   number: 80
+          - path: /task(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: drones-app-helm-deployment
+                port:
+                  number: 4000
      
