@@ -10,13 +10,6 @@ spec:
     - host: aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: greyfoods-api-lamp
-                port:
-                  number: 80
           - path: /task(/|$)(.*)
             pathType: Prefix
             backend:
@@ -24,4 +17,12 @@ spec:
                 name: drones-app-helm-deployment
                 port:
                   number: 4000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: greyfoods-api-lamp
+                port:
+                  number: 80
+          
      
