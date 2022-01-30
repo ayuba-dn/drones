@@ -1,28 +1,25 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
-metadata:
-  name: drones-ingress-srv
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
+metadata: 
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: drones-ingress2
 spec:
   rules:
-    - host: aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com
-      http:
-        paths:
-          - path: /task(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: drones-app-helm-deployment
-                port:
-                  number: 4000
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: greyfoods-api-lamp
-                port:
-                  number: 80
+  - http:
+      paths:
+      - path: /task(/|$)(.*)
+        backend:
+          serviceName: drones-app-helm-deployment
+          servicePort: 4000
+       - path: /
+        backend:
+          serviceName: greyfoods-api-lamp
+          servicePort: 80
+  tls: 
+    - 
+      hosts: 
+        - aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com
+
           
      
