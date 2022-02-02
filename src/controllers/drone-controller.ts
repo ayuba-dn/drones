@@ -87,7 +87,18 @@ class DroneController {
             console.log(error)
             throw new InternalServerError()
         }
-}
+    }
+
+    public checkBattery = async (req:Request,res:Response): Promise<{} | null> =>{
+        try{
+          let drone = await DroneRepository.findOneWithProjection(req.params.droneId,"battery")
+          return drone
+        }catch(error){
+            //log error here
+            console.log(error)
+            throw new InternalServerError()
+        }
+    }
 }
 
 export default new DroneController()

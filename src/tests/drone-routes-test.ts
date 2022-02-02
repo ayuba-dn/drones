@@ -134,7 +134,7 @@ describe("DroneRoutes", ()=>{
            
         it("Should Load A Drone WIth Medication and Return It",async ()=>{
              const response = await request.post(`/drones/${droneIds.validDrone}/medications`).send(validMedicationData)
-             //expect(response.statusCode).toBe(200)
+             expect(response.statusCode).toBe(200)
              expect(response.body).toEqual(
                  expect.objectContaining({
                      medications: expect.arrayContaining([

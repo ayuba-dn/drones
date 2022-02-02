@@ -28,7 +28,7 @@ export default class DroneRoutes extends BaseRoute {
             return res.send(response);
         })
         .delete(async(req:Request, res:Response)=>{
-            const response = "drone deleted";
+            const response = "TO DO>>>>>drone deleted";
             return res.send(response);
         })
 
@@ -53,8 +53,8 @@ export default class DroneRoutes extends BaseRoute {
 
 
         this.app.route("/drones/:droneId/battery")
-        .put(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
-            DroneController.load(req,res).then(drone=>{
+        .get((req:Request,res:Response,next:NextFunction)=>{
+            DroneController.checkBattery(req,res).then(drone=>{
                 res.status(200).send(drone)
             }).catch(error=>{
                 next(error)
