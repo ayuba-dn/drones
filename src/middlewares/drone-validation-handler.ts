@@ -32,8 +32,7 @@ import {body,param} from 'express-validator'
         .withMessage("Please enter a valid code allowed only letters, numbers, and underscore"),
     
         body('image')
-        .isString()
-        .notEmpty(),
+        .isString(),
     
         param('droneId')
         .isString()
