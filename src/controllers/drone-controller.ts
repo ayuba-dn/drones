@@ -30,7 +30,7 @@ class DroneController {
                 await DroneRepository.findOne(req.params.droneId).then(returnedDrone=>{
                     drone = returnedDrone
                 }).catch(()=>{
-                    throw new InternalServerError() 
+                    throw new InternalServerError("unable to load drone") 
                 })
                 if(drone){
                     if(!this.droneIsAvailable(drone,medication)){
@@ -41,8 +41,8 @@ class DroneController {
                     throw new ResourceNotFoundError("drone with the id passed not found") 
                 }
                
-                await DroneRepository.load(req.body,req.params.droneId).then(updatedDrone=>{
-                    updatedDrone = updatedDrone
+                await DroneRepository.load(req.body,req.params.droneId).then(updated=>{
+                    updatedDrone = updated
                 }).catch(error=>{
                     throw new InternalServerError()
                 })
@@ -77,6 +77,17 @@ class DroneController {
     public async getDrones(): Promise<DroneDoc[]> {
        return DroneRepository.getAll();
     }
+
+    public availableDrones = async (req:Request,res:Response): Promise<DroneDoc[] | null> =>{
+        try{
+          let drones = await DroneRepository.find({state:"IDLE"})
+          return drones
+        }catch(error){
+            //log error here
+            console.log(error)
+            throw new InternalServerError()
+        }
+}
 }
 
 export default new DroneController()

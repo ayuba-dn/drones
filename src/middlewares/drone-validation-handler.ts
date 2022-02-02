@@ -8,6 +8,48 @@ import {body,param} from 'express-validator'
 
 
  class DroneValidations{
+    regex = new RegExp(/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/);
+
+    loadMedication = [
+        body('name')
+        .isString()
+        .notEmpty()
+        .withMessage("Medication Name is Required")
+        .matches(this.regex)
+        .withMessage("Please enter a valid name allowed only letters, numbers,- and _"),
+    
+        body('weight')
+        .isFloat()
+        .notEmpty()
+        .withMessage("THe Weight field is required"),
+    
+    
+        body('code')
+        .isString()
+        .notEmpty()
+        .withMessage("Medication Code is Required")
+        .matches(this.regex)
+        .withMessage("Please enter a valid code allowed only letters, numbers, and underscore"),
+    
+        body('image')
+        .isString()
+        .notEmpty(),
+    
+        param('droneId')
+        .isString()
+        .notEmpty()
+        .withMessage("drone ID is required"),
+    
+        (req: Request,res: Response,next: NextFunction)=>{
+            const errors = validationResult(req)
+            if(!errors.isEmpty()){
+                let errorsData: any = errors.array()
+                throw new RequestValidationError(errorsData)
+            }
+            next()
+        } 
+    ];
+
     create = [
         body('weight')
         .notEmpty()
@@ -45,45 +87,6 @@ import {body,param} from 'express-validator'
             next()
         } 
     ];
-    loadMedication = [
-        body('name')
-        .isString()
-        .notEmpty()
-        .withMessage("Medication Name is Required")
-        .matches(/^[A-Za-z0-9 - _]+$/)
-        .withMessage("Please enter a valid name allowed only letters, numbers,- and _"),
-    
-        body('weight')
-        .isFloat()
-        .notEmpty()
-        .withMessage("THe Weight field is required"),
-    
-    
-        body('code')
-        .isString()
-        .notEmpty()
-        .withMessage("Medication Code is Required")
-        .matches(/^[A-Z0-9  _]+$/)
-        .withMessage("Please enter a valid name allowed only letters, numbers, and underscore"),
-    
-        body('image')
-        .isString()
-        .notEmpty(),
-    
-        param('droneId')
-        .isString()
-        .notEmpty()
-        .withMessage("drone ID is required"),
-    
-        (req: Request,res: Response,next: NextFunction)=>{
-            const errors = validationResult(req)
-            if(!errors.isEmpty()){
-                let errorsData: any = errors.array()
-                throw new RequestValidationError(errorsData)
-            }
-            next()
-        } 
-    ];
 
     getMedications = [
        
@@ -94,6 +97,7 @@ import {body,param} from 'express-validator'
     
         (req: Request,res: Response,next: NextFunction)=>{
             const errors = validationResult(req)
+            console.log("data",req.body)
             if(!errors.isEmpty()){
                 let errorsData: any = errors.array()
                 throw new RequestValidationError(errorsData)

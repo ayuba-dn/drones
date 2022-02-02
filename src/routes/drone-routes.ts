@@ -34,17 +34,15 @@ export default class DroneRoutes extends BaseRoute {
 
 
         this.app.route("/drones/:droneId/medications")
-        .put(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
-            return DroneController.load(req,res).then(drone=>{
+        .post(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
+            DroneController.load(req,res).then(drone=>{
                 res.status(200).send(drone)
             }).catch(error=>{
                 next(error)
             })
         })
-
-        this.app.route("/drones/:droneId/medications")
-        .get(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
-            return DroneController.load(req,res).then(drone=>{
+        .get(DroneValidation.getMedications,(req:Request,res:Response,next:NextFunction)=>{
+            DroneController.load(req,res).then(drone=>{
                 res.status(200).send(drone)
             }).catch(error=>{
                 next(error)
@@ -56,13 +54,22 @@ export default class DroneRoutes extends BaseRoute {
 
         this.app.route("/drones/:droneId/battery")
         .put(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
-            return DroneController.load(req,res).then(drone=>{
+            DroneController.load(req,res).then(drone=>{
                 res.status(200).send(drone)
             }).catch(error=>{
                 next(error)
             })
                 
                          
+        })
+
+        this.app.route("/drones/available/")
+        .get((req:Request,res:Response,next:NextFunction)=>{
+            DroneController.availableDrones(req,res).then(drones=>{
+                res.status(200).send(drones)
+            }).catch(error=>{
+                next(error)
+            })                         
         })
 
         

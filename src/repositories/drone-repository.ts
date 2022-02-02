@@ -20,6 +20,10 @@ class DroneRepository {
         return Drone.findById(droneId)
      }
 
+     find = async (query: {}): Promise<DroneDoc[] | null>=> {  
+      return Drone.find(query)
+     }
+
 
     
 }
