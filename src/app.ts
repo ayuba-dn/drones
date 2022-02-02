@@ -42,6 +42,10 @@ class DroneService {
        return this.app
     }
 
+    runJobs = () => {
+
+    } 
+
     connectDb = async(dbUrl: string) =>{
         try{
             await mongoose.connect(dbUrl)

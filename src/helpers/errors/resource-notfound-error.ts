@@ -1,6 +1,6 @@
-import  { CustomError} from './custom-error'
+import  { BaseError} from './base-error'
 
-export class ResourceNotFoundError extends CustomError{ //Implements Serializable
+export class ResourceNotFoundError extends BaseError{ //Implements Serializable
     statusCode = 404
     constructor(public error: string){
         super(error)

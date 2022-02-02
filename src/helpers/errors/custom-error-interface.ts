@@ -1,4 +1,4 @@
-interface CustomError {
+interface BaseError {
     statusCode: string,
     serializeErrors(): 
         {

@@ -1,5 +1,5 @@
-import  { CustomError} from './custom-error'
-export class NotFoundError extends CustomError{
+import  { BaseError} from './base-error'
+export class NotFoundError extends BaseError{
     reason = "Route Not Found"
     statusCode = 404
     constructor(){

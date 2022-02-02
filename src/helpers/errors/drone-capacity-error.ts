@@ -1,6 +1,6 @@
-import  { CustomError} from './custom-error'
+import  { BaseError} from './base-error'
 
-export class DroneCapacityError extends CustomError{ //Implements Serializable
+export class DroneCapacityError extends BaseError{ //Implements Serializable
     statusCode = 400
     constructor(public error: string){
         super("Drone Validation Error")

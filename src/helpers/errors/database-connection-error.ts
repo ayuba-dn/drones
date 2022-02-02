@@ -1,5 +1,5 @@
-import  { CustomError} from './custom-error'
-export class DatabaseConnectionError extends CustomError{
+import  { BaseError} from './base-error'
+export class DatabaseConnectionError extends BaseError{
     reason = "Database not connected"
     statusCode = 500
     constructor(public error: string){

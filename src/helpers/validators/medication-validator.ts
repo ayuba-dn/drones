@@ -1,5 +1,5 @@
 
-import {body} from 'express-validator'
+import {body,param} from 'express-validator'
 
  const DroneValidator = [
     body('name')
@@ -24,6 +24,10 @@ import {body} from 'express-validator'
     .withMessage("Please enter a valid name allowed only letters, numbers, and underscore"),
 
     body('image')
+    .isString()
+    .notEmpty(),
+
+    param('droneId')
     .isString()
     .notEmpty(),
 ]

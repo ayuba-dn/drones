@@ -32,7 +32,6 @@ class DroneController {
                 }).catch(()=>{
                     throw new InternalServerError() 
                 })
-                console.log(drone)
                 if(drone){
                     if(!this.droneIsAvailable(drone,medication)){
                          throw new DroneCapacityError(this.droneAvailabilityErrorMsg) 
@@ -45,7 +44,6 @@ class DroneController {
                 await DroneRepository.load(req.body,req.params.droneId).then(updatedDrone=>{
                     updatedDrone = updatedDrone
                 }).catch(error=>{
-                    console.log("Hello")
                     throw new InternalServerError()
                 })
                 return updatedDrone
@@ -56,7 +54,6 @@ class DroneController {
         //check battery
         if(drone.battery < 0.25){
             this.droneAvailabilityErrorMsg = "drone battery is low, please recharge and try again"
-            console.log("low battery")
             return false
         }
         //check weight

@@ -1,6 +1,6 @@
-import  { CustomError} from './custom-error'
+import  { BaseError} from './base-error'
 
-export class InternalServerError extends CustomError{ //Implements Serializable
+export class InternalServerError extends BaseError{ //Implements Serializable
     statusCode = 500
     private error:string
     constructor(error?: string){
