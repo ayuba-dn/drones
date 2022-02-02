@@ -194,6 +194,21 @@ describe("DroneRoutes", ()=>{
              )
         })
     })    
+
+    describe("GET /drones/:droneId/battery",()=>{
+        it("Should Return the battery level of the drone",async ()=>{
+             const response = await request.get(`/drones/${droneIds.validDrone}/battery`)
+             expect(response.statusCode).toBe(200)
+             expect(response.body).toEqual(
+                    expect.objectContaining(
+                        {
+                         battery: expect.any(Number)
+                        }
+                    )
+             )
+        })
+    })    
+
 })
 
 
