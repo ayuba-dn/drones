@@ -35,13 +35,13 @@ class DroneService {
              return res.status(200).send("Drone service running");
        })
 
-       this.app.get('*',async (req,res)=>{
-        throw new NotFoundError()
-       })
+    //    this.app.get('*',async (req,res)=>{
+    //     throw new NotFoundError()
+    //    })
 
-       this.app.post('*',async (req,res)=>{
-           throw new NotFoundError()
-       })
+    //    this.app.post('*',async (req,res)=>{
+    //        throw new NotFoundError()
+    //    })
 
         this.app.use(errorHandler)
     }
