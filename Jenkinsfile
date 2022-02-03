@@ -27,15 +27,18 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                          customImage.push()
                     }  
-                    sh 'docker ps'                   
+                    sh 'docker images'
+                    sh "docker tag drones computer14/drones"
+                   
                }
             }
 	    }
 
       stage('Run Tests') {
             steps { 
-                    sh 'pwd'      
-                    sh 'npm build'
+                    echo 'Running Tests.....'
+                    sh 'docker exec -it drones npm run test'     
+                    echo 'Tests Completed!' 
             }
       }
 
