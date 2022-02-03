@@ -37,7 +37,7 @@ pipeline {
       stage('Run Tests') {
             steps { 
                     echo 'Running Tests.....'
-                    sh 'docker exec -it drones npm run test'     
+                    sh 'docker run drones npm run test'     
                     echo 'Tests Completed!' 
             }
       }
