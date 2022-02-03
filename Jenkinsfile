@@ -14,7 +14,8 @@ pipeline {
      
       stage('Build Typescript to js') {
             steps { 
-                    sh 'pwd'      
+                    sh 'pwd'   
+                    sh 'npm install'   
                     sh 'npm run build'
             }
       }
