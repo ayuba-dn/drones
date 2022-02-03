@@ -11,31 +11,33 @@ pipeline {
         //                   sh '/usr/local/bin/helm upgrade --install mongodb ./mongodb'
         //     }           
         // }https://ayuba-dn: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@github.com/ayuba-dn/drones.git
-      stage('Run Tests') {
-            steps { 
-                    sh 'pwd'      
-                    sh 'npm test'
-            }
-        }
-       
-        stage('Build Typescript to js') {
+     
+      stage('Build Typescript to js') {
             steps { 
                     sh 'pwd'      
                     sh 'npm build'
             }
-        }
+      }
         
          
-        stage('Build docker Image') {
+      stage('Build docker Image') {
            steps {
                script {         
                     def customImage = docker.build('computer14/drones', ".")
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                          customImage.push()
-                    }                     
+                    }  
+                    sh 'docker ps'                   
                }
             }
 	    }
+
+      stage('Run Tests') {
+            steps { 
+                    sh 'pwd'      
+                    sh 'npm build'
+            }
+      }
 
 
       stage('Push to k8 ') {
