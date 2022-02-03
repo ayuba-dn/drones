@@ -34,13 +34,13 @@ pipeline {
             }
 	    }
 
-      stage('Run Tests') {
-            steps { 
-                    echo 'Running Tests.....'
-                    sh 'docker run drones npm run test'     
-                    echo 'Tests Completed!' 
-            }
-      }
+      // stage('Run Tests') {
+      //       steps { 
+      //               echo 'Running Tests.....'
+      //               sh 'docker run drones npm run test'     
+      //               echo 'Tests Completed!' 
+      //       }
+      // }
 
 
       stage('Push to k8 ') {
