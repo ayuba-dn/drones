@@ -23,14 +23,14 @@ class DroneRoutes extends base_route_1.BaseRoute {
         this.app.route("/drones")
             .get((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             drone_controller_1.default.getDrones().then(drone => {
-                res.status(201).send(drone);
+                return res.status(201).send(drone);
             }).catch(error => {
                 next(error);
             });
         }))
             .post(drone_validation_handler_1.default.create, (req, res, next) => {
             drone_controller_1.default.create(req, res).then(drone => {
-                res.status(201).send(drone);
+                return res.status(201).send(drone);
             }).catch(error => {
                 next(error);
             });
@@ -46,14 +46,14 @@ class DroneRoutes extends base_route_1.BaseRoute {
         this.app.route("/drones/:droneId/medications")
             .post(drone_validation_handler_1.default.loadMedication, (req, res, next) => {
             drone_controller_1.default.load(req, res).then(drone => {
-                res.status(200).send(drone);
+                return res.status(200).send(drone);
             }).catch(error => {
                 next(error);
             });
         })
             .get(drone_validation_handler_1.default.getMedications, (req, res, next) => {
-            drone_controller_1.default.load(req, res).then(drone => {
-                res.status(200).send(drone);
+            drone_controller_1.default.medications(req, res).then(medications => {
+                return res.status(200).send(medications);
             }).catch(error => {
                 next(error);
             });

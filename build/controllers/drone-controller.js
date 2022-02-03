@@ -100,6 +100,17 @@ class DroneController {
                 throw new internal_server_error_1.InternalServerError();
             }
         });
+        this.medications = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let medications = yield drone_repository_1.default.findOneWithProjection(req.params.droneId, "medications");
+                return medications;
+            }
+            catch (error) {
+                //log error here
+                console.log(error);
+                throw new internal_server_error_1.InternalServerError();
+            }
+        });
     }
     getDrones() {
         return __awaiter(this, void 0, void 0, function* () {

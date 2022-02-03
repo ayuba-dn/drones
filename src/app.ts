@@ -15,7 +15,6 @@ class DroneService {
     constructor(){
         this.app = express()
         this.app.use(express.json())
-        this.app.use(express.static("public")); //needed to serve API docs
         this.app.use('/docs', swaggerUi.serve,
             swaggerUi.setup(this.swaggerDocument));
         this.initializeRoutes()
