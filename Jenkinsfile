@@ -12,13 +12,13 @@ pipeline {
         //     }           
         // }https://ayuba-dn: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@github.com/ayuba-dn/drones.git
      
-      stage('Build Typescript to js') {
-            steps { 
-                    sh 'pwd'   
-                    sh 'npm install'   
-                    sh 'npm run build'
-            }
-      }
+      // stage('Build Typescript to js') {
+      //       steps { 
+      //               sh 'pwd'   
+      //               sh 'npm install'   
+      //               sh 'npm run build'
+      //       }
+      // }
         
          
       stage('Build docker Image') {
