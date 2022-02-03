@@ -11,7 +11,13 @@ pipeline {
         //                   sh '/usr/local/bin/helm upgrade --install mongodb ./mongodb'
         //     }           
         // }
-
+      stage('Run Tests') {
+            steps { 
+                    sh 'pwd'      
+                    sh 'npm test'
+            }
+        }
+       
         stage('Build Typescript to js') {
             steps { 
                     sh 'pwd'      

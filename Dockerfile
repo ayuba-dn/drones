@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY swagger.json ./
 COPY tsoa.json ./
-COPY jest.config.json ./
+COPY jest.config.js ./
 RUN npm install
 COPY build ./
 CMD ["npm", "start"]

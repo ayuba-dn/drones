@@ -4,7 +4,9 @@ services:
  
   api:
       restart: always
-      build: .
+      build: 
+        context: .
+        dockerfile: Dockerfile
       ports:
         - 4000:4000
       networks:
