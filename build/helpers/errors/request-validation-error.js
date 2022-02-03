@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RequestValidationError = void 0;
-const custom_error_1 = require("./custom-error");
-class RequestValidationError extends custom_error_1.CustomError {
+const base_error_1 = require("./base-error");
+class RequestValidationError extends base_error_1.BaseError {
     constructor(errors) {
         super("Validation Error");
         this.errors = errors;

@@ -14,38 +14,62 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const base_route_1 = require("../helpers/base-route");
 const drone_controller_1 = __importDefault(require("../controllers/drone-controller"));
-const drone_validator_1 = __importDefault(require("../helpers/validators/drone-validator"));
-const medication_validator_1 = __importDefault(require("../helpers/validators/medication-validator"));
-const validation_handler_1 = require("../middlewares/validation-handler");
+const drone_validation_handler_1 = __importDefault(require("../middlewares/drone-validation-handler"));
 class DroneRoutes extends base_route_1.BaseRoute {
     constructor(app) {
         super(app);
     }
     setUpRoutes() {
         this.app.route("/drones")
-            .get((req, res) => __awaiter(this, void 0, void 0, function* () {
-            const response = "drones.....";
-            return res.send(response);
+            .get((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            drone_controller_1.default.getDrones().then(drone => {
+                res.status(201).send(drone);
+            }).catch(error => {
+                next(error);
+            });
         }))
-            .post(drone_validator_1.default, validation_handler_1.ValidationHandler, (req, res, next) => {
+            .post(drone_validation_handler_1.default.create, (req, res, next) => {
             drone_controller_1.default.create(req, res).then(drone => {
                 res.status(201).send(drone);
             }).catch(error => {
                 next(error);
             });
         })
-            .put((req, res) => __awaiter(this, void 0, void 0, function* () {
+            .put(drone_validation_handler_1.default.create, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const response = "drone updated";
             return res.send(response);
         }))
             .delete((req, res) => __awaiter(this, void 0, void 0, function* () {
-            const response = "drone deleted";
+            const response = "TO DO>>>>>drone deleted";
             return res.send(response);
         }));
-        this.app.route("/drones/:droneId/load")
-            .put(medication_validator_1.default, validation_handler_1.ValidationHandler, (req, res, next) => {
-            return drone_controller_1.default.load(req, res).then(drone => {
+        this.app.route("/drones/:droneId/medications")
+            .post(drone_validation_handler_1.default.loadMedication, (req, res, next) => {
+            drone_controller_1.default.load(req, res).then(drone => {
                 res.status(200).send(drone);
+            }).catch(error => {
+                next(error);
+            });
+        })
+            .get(drone_validation_handler_1.default.getMedications, (req, res, next) => {
+            drone_controller_1.default.load(req, res).then(drone => {
+                res.status(200).send(drone);
+            }).catch(error => {
+                next(error);
+            });
+        });
+        this.app.route("/drones/:droneId/battery")
+            .get((req, res, next) => {
+            drone_controller_1.default.checkBattery(req, res).then(drone => {
+                res.status(200).send(drone);
+            }).catch(error => {
+                next(error);
+            });
+        });
+        this.app.route("/drones/available/")
+            .get((req, res, next) => {
+            drone_controller_1.default.availableDrones(req, res).then(drones => {
+                res.status(200).send(drones);
             }).catch(error => {
                 next(error);
             });

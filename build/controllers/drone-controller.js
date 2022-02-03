@@ -38,9 +38,8 @@ class DroneController {
             yield drone_repository_1.default.findOne(req.params.droneId).then(returnedDrone => {
                 drone = returnedDrone;
             }).catch(() => {
-                throw new internal_server_error_1.InternalServerError();
+                throw new internal_server_error_1.InternalServerError("unable to load drone");
             });
-            console.log(drone);
             if (drone) {
                 if (!this.droneIsAvailable(drone, medication)) {
                     throw new drone_capacity_error_1.DroneCapacityError(this.droneAvailabilityErrorMsg);
@@ -49,10 +48,9 @@ class DroneController {
             else {
                 throw new resource_notfound_error_1.ResourceNotFoundError("drone with the id passed not found");
             }
-            yield drone_repository_1.default.load(req.body, req.params.droneId).then(updatedDrone => {
-                updatedDrone = updatedDrone;
+            yield drone_repository_1.default.load(req.body, req.params.droneId).then(updated => {
+                updatedDrone = updated;
             }).catch(error => {
-                console.log("Hello");
                 throw new internal_server_error_1.InternalServerError();
             });
             return updatedDrone;
@@ -61,7 +59,6 @@ class DroneController {
             //check battery
             if (drone.battery < 0.25) {
                 this.droneAvailabilityErrorMsg = "drone battery is low, please recharge and try again";
-                console.log("low battery");
                 return false;
             }
             //check weight
@@ -81,6 +78,28 @@ class DroneController {
             }
             return true;
         };
+        this.availableDrones = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let drones = yield drone_repository_1.default.find({ state: "IDLE" });
+                return drones;
+            }
+            catch (error) {
+                //log error here
+                console.log(error);
+                throw new internal_server_error_1.InternalServerError();
+            }
+        });
+        this.checkBattery = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let drone = yield drone_repository_1.default.findOneWithProjection(req.params.droneId, "battery");
+                return drone;
+            }
+            catch (error) {
+                //log error here
+                console.log(error);
+                throw new internal_server_error_1.InternalServerError();
+            }
+        });
     }
     getDrones() {
         return __awaiter(this, void 0, void 0, function* () {

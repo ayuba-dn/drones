@@ -10,7 +10,7 @@ import Medication from '../models/types/medication'
 class DroneController {
     
     private droneAvailabilityErrorMsg:string = ''
-   
+    
     public create = async (req:Request,res:Response): Promise<DroneDoc> =>{
                try{
                  let drone = await DroneRepository.create(req.body)
@@ -21,7 +21,7 @@ class DroneController {
                    throw new InternalServerError()
                }
     }
-
+    
     public load =async (req:Request,res:Response): Promise<DroneDoc | null> =>{
                 let medication = req.body
                 let updatedDrone = null
@@ -93,6 +93,17 @@ class DroneController {
         try{
           let drone = await DroneRepository.findOneWithProjection(req.params.droneId,"battery")
           return drone
+        }catch(error){
+            //log error here
+            console.log(error)
+            throw new InternalServerError()
+        }
+    }
+
+    public medications = async (req:Request,res:Response): Promise<{} | null> =>{
+        try{
+          let medications = await DroneRepository.findOneWithProjection(req.params.droneId,"medications")
+          return medications
         }catch(error){
             //log error here
             console.log(error)

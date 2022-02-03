@@ -4,15 +4,20 @@ import mongoose from "mongoose"
 import { errorHandler } from './middlewares/error-handler'
 import { NotFoundError } from "./helpers/errors/not-found-error"
 import { DatabaseConnectionError } from "./helpers/errors/database-connection-error"
-
+import swaggerUi = require('swagger-ui-express');
+import fs from 'fs'
 class DroneService {
+    private swaggerFile: any = (process.cwd()+"/swagger.json");
+    private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
+    private swaggerDocument = JSON.parse(this.swaggerData);
     private app: Application
     
     constructor(){
         this.app = express()
         this.app.use(express.json())
-        
-
+        this.app.use(express.static("public")); //needed to serve API docs
+        this.app.use('/docs', swaggerUi.serve,
+            swaggerUi.setup(this.swaggerDocument));
         this.initializeRoutes()
     }
    
@@ -23,17 +28,21 @@ class DroneService {
         });
     }
     //add all routes to the App here
-    private initializeRoutes = () => {
-      new DroneRoutes(this.app);
+    private initializeRoutes = async () => {
+       await new DroneRoutes(this.app);
       
        this.app.route("/")
        .get(async (req: express.Request, res: express.Response) => {
              return res.status(200).send("Drone service running");
        })
 
-        this.app.all('*',async (req,res)=>{
-         throw new NotFoundError()
-        })
+       this.app.get('*',async (req,res)=>{
+        throw new NotFoundError()
+       })
+
+       this.app.post('*',async (req,res)=>{
+           throw new NotFoundError()
+       })
 
         this.app.use(errorHandler)
     }

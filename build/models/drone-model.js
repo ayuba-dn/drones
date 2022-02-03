@@ -22,7 +22,8 @@ const MedicationSchema = new mongoose_1.default.Schema({
     },
     image: {
         type: String,
-        required: true
+        required: false,
+        default: "default.png"
     }
 });
 const Medication = mongoose_1.default.model('Medication', MedicationSchema);

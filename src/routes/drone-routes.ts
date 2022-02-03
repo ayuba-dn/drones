@@ -12,13 +12,16 @@ export default class DroneRoutes extends BaseRoute {
     
     setUpRoutes() {
         this.app.route("/drones")
-        .get(async (req: Request, res: Response) => {
-              const response = "drones.....";
-              return res.send(response);
+        .get(async (req: Request, res: Response,next:NextFunction) => {
+            DroneController.getDrones().then(drone=>{
+                return res.status(201).send(drone)
+            }).catch(error=>{
+                next(error)
+            })  
         })
         .post(DroneValidation.create,(req:Request, res:Response,next:NextFunction)=>{
                 DroneController.create(req,res).then(drone=>{
-                    res.status(201).send(drone)
+                    return res.status(201).send(drone)
                 }).catch(error=>{
                     next(error)
                 })                
@@ -36,14 +39,14 @@ export default class DroneRoutes extends BaseRoute {
         this.app.route("/drones/:droneId/medications")
         .post(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
             DroneController.load(req,res).then(drone=>{
-                res.status(200).send(drone)
+                return res.status(200).send(drone)
             }).catch(error=>{
                 next(error)
             })
         })
         .get(DroneValidation.getMedications,(req:Request,res:Response,next:NextFunction)=>{
-            DroneController.load(req,res).then(drone=>{
-                res.status(200).send(drone)
+            DroneController.medications(req,res).then(medications=>{
+                return res.status(200).send(medications)
             }).catch(error=>{
                 next(error)
             })

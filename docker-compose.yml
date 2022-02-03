@@ -2,33 +2,33 @@ version: '3'
 
 services:
  
-  # drones:
-  #     restart: always
-  #     build: .
-  #     ports:
-  #       - 4000:4000
-  #     networks:
-  #         - dronesNet
-  #     depends_on:
-  #       - mongo
-  #     environment: 
-  #       DB_HOST: ayuba-dauda_mongo_1
-  #       DB_PORT: 27017
-  #       DB_NAME: drones
-  #       DB_USER: droneuser
-  #       DB_PASSWORD: xc892zx22
-  #       AUTH_DB_NAME: admin
+  drones:
+      restart: always
+      build: .
+      ports:
+        - 4000:4000
+      networks:
+          - dronesNet
+      depends_on:
+        - mongo
+      environment: 
+        DB_HOST: drones-mongo-1
+        DB_PORT: 27017
+        DB_NAME: drones
+        DB_USER: droneuser
+        DB_PASSWORD: xc892zx22
+        AUTH_DB_NAME: admin
   
   mongo:
     image: mongo
     ports:
       - 27017:27017
-    # networks:
-    #    - dronesNet
+    networks:
+       - dronesNet
     environment:
         MONGO_INITDB_DATABASE: admin
         MONGO_INITDB_ROOT_USERNAME: droneuser
         MONGO_INITDB_ROOT_PASSWORD: xc892zx22
-# networks:
-#   dronesNet:
-#     driver: bridge
+networks:
+  dronesNet:
+    driver: bridge

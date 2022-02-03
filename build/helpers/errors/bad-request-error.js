@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BadRequestError = void 0;
-const custom_error_1 = require("./custom-error");
-class BadRequestError extends custom_error_1.CustomError {
+const base_error_1 = require("./base-error");
+class BadRequestError extends base_error_1.BaseError {
     //reason: string
     constructor(reason) {
         super(reason);

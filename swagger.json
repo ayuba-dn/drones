@@ -1,0 +1,276 @@
+
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Drone Service API Documentation",
+        "version": "1.0.0",
+        "title": "Drones API",
+        "contact": {
+            "email": "mailtoayuba@gmail.com"
+        }
+       
+    },
+    "schemes": ["http"],
+    "host": "localhost:4000",
+    "basePath": "",
+    "paths" : {
+        "/drones" : {
+            "get" : {
+                "summary" : "Get all the drones",
+                "description": "Get all the drones",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/drone"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Save the drone",
+                "description": "Save the drone",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "drone data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/drone"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/drones"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+       
+       
+
+        "/drones/{id}/medications" : {
+            "post" : {
+                "summary" : "Loads the drone with medications",
+                "description": "Update the drones medications",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "drone id that needs to be loaded",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "medication object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/medication"
+                           
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/drone"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "get" : {
+                "summary" : "get the medications loaded on the drone",
+                "description": "all medications loaded on the drone specified are returned",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "drone id that needs to be retrieved",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/medications"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/drones/available" : {
+            "get" : {
+                "summary" : "Returns drones available for loading",
+                "description": "Drones whose weight and battery levels are within the required loading limits are returned",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/drones"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+           
+        }
+
+       
+    }, 
+    "definitions": {
+        "drones": {
+            "type": "object",
+            "properties": {
+                "serialNumber": {
+                     "type": "integer",
+                     "example": 33
+                },
+                "model": {
+                    "type": "integer",
+                    "example": "TD-44"
+                },
+                "weight": {
+                    "type": "integer",
+                    "example": 4.9
+                },
+                "battery": {
+                    "type": "integer",
+                    "example": 0.4
+                },
+                "medications":{
+                    "type":"object",
+                    "$ref":"#/definitions/medication"
+                }           
+             }
+        },
+        "drone": {
+            "type": "object",
+            "properties": {
+                "serialNumber": {
+                     "type": "integer"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "integer"
+                },
+                "battery": {
+                    "type": "integer"
+                },
+                "medications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/medication"
+                        }
+                }
+            }
+        },
+       
+
+        "medication": {
+            "type": "object",
+            "properties": {
+                "name": {
+                     "type": "string",
+                     "example": "paracetamol"
+                },
+                "code": {
+                    "weight": "string",
+                    "example": "TC-89"
+                },
+                "weight": {
+                    "type": "integer",
+                    "example": 5.7
+                },
+                "image": {
+                    "type": "file"
+                }
+            }
+        },
+        "medications": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/drone"
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "soemthing went wrong...."
+                }
+            }
+
+        }
+
+        }
+       
+    }

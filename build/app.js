@@ -18,12 +18,17 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const error_handler_1 = require("./middlewares/error-handler");
 const not_found_error_1 = require("./helpers/errors/not-found-error");
 const database_connection_error_1 = require("./helpers/errors/database-connection-error");
+const swaggerUi = require("swagger-ui-express");
+const fs_1 = __importDefault(require("fs"));
 class DroneService {
     constructor() {
+        this.swaggerFile = (process.cwd() + "/swagger.json");
+        this.swaggerData = fs_1.default.readFileSync(this.swaggerFile, 'utf8');
+        this.swaggerDocument = JSON.parse(this.swaggerData);
         //starts the server on a given port
         this.start = (port) => {
             return this.app.listen(port, () => {
-                console.log(`Drone service is running on port ${port}`);
+                console.log(`Drone service is running on port >>>> ${port}`);
             });
         };
         //add all routes to the App here
@@ -41,17 +46,22 @@ class DroneService {
         this.getAppInstance = () => {
             return this.app;
         };
+        this.runJobs = () => {
+        };
         this.connectDb = (dbUrl) => __awaiter(this, void 0, void 0, function* () {
             try {
                 yield mongoose_1.default.connect(dbUrl);
                 console.log("Connected to database");
             }
             catch (error) {
+                console.log("Error Connecting to database", error);
                 throw new database_connection_error_1.DatabaseConnectionError("Error Connecting DB");
             }
         });
-        this.app = (0, express_1.default)();
+        this.app = express_1.default();
         this.app.use(express_1.default.json());
+        this.app.use(express_1.default.static("public")); //needed to serve API docs
+        this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(this.swaggerDocument));
         this.initializeRoutes();
     }
 }

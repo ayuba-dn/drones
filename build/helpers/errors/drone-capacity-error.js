@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DroneCapacityError = void 0;
-const custom_error_1 = require("./custom-error");
-class DroneCapacityError extends custom_error_1.CustomError {
+const base_error_1 = require("./base-error");
+class DroneCapacityError extends base_error_1.BaseError {
     constructor(error) {
         super("Drone Validation Error");
         this.error = error;

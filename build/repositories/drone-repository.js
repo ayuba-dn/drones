@@ -24,6 +24,13 @@ class DroneRepository {
         this.findOne = (droneId) => __awaiter(this, void 0, void 0, function* () {
             return drone_model_1.Drone.findById(droneId);
         });
+        this.findOneWithProjection = (droneId, projection) => __awaiter(this, void 0, void 0, function* () {
+            console.log(projection);
+            return drone_model_1.Drone.findById(droneId).select(projection);
+        });
+        this.find = (query) => __awaiter(this, void 0, void 0, function* () {
+            return drone_model_1.Drone.find(query);
+        });
     }
 }
 exports.default = new DroneRepository();
