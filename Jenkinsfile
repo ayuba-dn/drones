@@ -28,7 +28,7 @@ pipeline {
                          customImage.push()
                     }  
                     sh 'docker images'
-                    sh "docker tag drones computer14/drones"
+                    sh "docker tag computer14/drones drones"
                    
                }
             }
