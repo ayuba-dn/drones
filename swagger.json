@@ -55,13 +55,10 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "successful operation",
                         "schema": {
-                            "type": "array",
-                            "items": {
                                 "$ref": "#/definitions/droneschema"
-                            }
                         }
                     },
                     "400": {
@@ -102,7 +99,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "successful operation",
                         "schema": {
                             "type": "array",
@@ -264,6 +261,41 @@
             }
         },
 
+        "droneschema": {
+            "type": "object",
+            "properties": {
+                "serialNumber": {
+                     "type": "integer",
+                     "example": "747"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "LW-343"
+                },
+                "weight": {
+                    "type": "integer",
+                    "example": 4.5
+                },
+                "battery": {
+                    "type": "integer",
+                    "example": 0.9
+                },
+                "state": {
+                    "type": "string",
+                    "example": "IDLE"
+                },
+                "medications": {
+                    "type": "array",
+                    "example": []
+                },
+                "_id": {
+                    "type": "string",
+                    "example": "61fd0f3c565000253e005891"
+                }
+               
+            }
+        },
+
         "medication": {
             "type": "object",
             "properties": {
@@ -293,15 +325,27 @@
         "InvalidResponse": {
             "type": "object",
             "properties": {
-                "statusCode": {
-                    "type": "integer",
-                    "example": 400
-                },
-                "message": {
-                    "type": "soemthing went wrong...."
-                }
+                "errors":{
+                   "type": "array",
+                   "items":{
+                        "$ref": "#/definitions/error"
+                   }
+                } 
             }
 
+        },
+        "error":{
+            "type":"object",
+            "properties": {
+                "message": {
+                    "type":"string",
+                    "example":"Error message"
+                },
+                "field": {
+                    "type":"string",
+                    "example":"error field if any"
+                }
+            }  
         }
 
         }
