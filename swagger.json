@@ -50,7 +50,7 @@
                         "description": "drone data",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/drone"
+                            "$ref": "#/definitions/dronedata"
                         }
                     }
                 ],
@@ -210,17 +210,21 @@
             "type": "object",
             "properties": {
                 "serialNumber": {
-                     "type": "integer"
-                },
-                "model": {
-                    "type": "string"
-                },
-                "weight": {
-                    "type": "integer"
-                },
-                "battery": {
-                    "type": "integer"
-                },
+                    "type": "integer",
+                    "example": "747"
+               },
+               "model": {
+                   "type": "string",
+                   "example": "LW-343"
+               },
+               "weight": {
+                   "type": "integer",
+                   "example": 4.5
+               },
+               "battery": {
+                   "type": "integer",
+                   "example": 0.9
+               },
                 "medications": {
                         "type": "array",
                         "items": {
@@ -229,7 +233,28 @@
                 }
             }
         },
-       
+        "dronedata": {
+            "type": "object",
+            "properties": {
+                "serialNumber": {
+                     "type": "integer",
+                     "example": "747"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "LW-343"
+                },
+                "weight": {
+                    "type": "integer",
+                    "example": 4.5
+                },
+                "battery": {
+                    "type": "integer",
+                    "example": 0.9
+                }
+               
+            }
+        },
 
         "medication": {
             "type": "object",
