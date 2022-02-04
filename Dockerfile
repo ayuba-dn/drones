@@ -8,5 +8,5 @@ COPY tsoa.json ./
 COPY jest.config.js ./
 RUN npm install
 COPY build ./
-CMD ["npm", "dev"]
+CMD ["npm", "start"]
 EXPOSE 4000

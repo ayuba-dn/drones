@@ -26,7 +26,7 @@ pipeline {
                script {         
                     def customImage = docker.build('computer14/drones', ".")
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                         customImage.push()
+                         customImage.push("${env.BUILD_NUMBER}")
                     }  
                     sh 'docker images'
                     sh "docker tag computer14/drones drones"
@@ -52,7 +52,7 @@ pipeline {
                           sh 'cp -R helm-deployment/* .'
 		                  sh 'ls -ltr'
                           sh 'pwd'
-                          sh "/usr/local/bin/helm upgrade --install drones-app .  --set image.repository=registry.hub.docker.com/computer14/drones --set image.tag=latest"
+                          sh "/usr/local/bin/helm upgrade --install drones-app .  --set image.repository=registry.hub.docker.com/computer14/drones --set image.tag=2.o"
                         }          
                        }   
                        
