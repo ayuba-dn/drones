@@ -53,6 +53,7 @@ An API/Service developed to manage drones which are designated for delivery. Con
 1. [API documentation link (based on openAPI)](http://aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com/docs/#/)
 
 2. [API Base URL](http://aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com)
+3.  [Drones Periodic Battery Check Logs (On Kibana Dashboard)](http://a3d404b52b5bb4a22a919777ed2e1e32-1805370564.us-east-1.elb.amazonaws.com:5601/app/kibana#/discover)
   
 
 ### INSTALLATION
