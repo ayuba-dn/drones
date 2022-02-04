@@ -10,7 +10,7 @@ pipeline {
         //                   sh 'pwd'
         //                   sh '/usr/local/bin/helm upgrade --install mongodb ./mongodb'
         //     }           
-        // }https://ayuba-dn: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@github.com/ayuba-dn/drones.git
+        // }
      
       // stage('Build Typescript to js') {
       //       steps { 
