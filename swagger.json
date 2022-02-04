@@ -60,7 +60,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/drone"
+                                "$ref": "#/definitions/droneschema"
                             }
                         }
                     },
@@ -189,7 +189,7 @@
                      "example": 33
                 },
                 "model": {
-                    "type": "integer",
+                    "type": "string",
                     "example": "TD-44"
                 },
                 "weight": {
@@ -199,6 +199,10 @@
                 "battery": {
                     "type": "integer",
                     "example": 0.4
+                },
+                "state": {
+                    "type": "string",
+                    "example": "LOADING"
                 },
                 "medications":{
                     "type":"object",
@@ -225,6 +229,10 @@
                    "type": "integer",
                    "example": 0.9
                },
+               "state": {
+                "type": "string",
+                "example": "LOADING"
+                },
                 "medications": {
                         "type": "array",
                         "items": {

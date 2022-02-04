@@ -36,7 +36,7 @@ const MedicationSchema = new mongoose.Schema({
     }
 })
 
-const Medication = mongoose.model('Medication',MedicationSchema)
+// const Medication = mongoose.model('Medication',MedicationSchema)
 
 const droneSchema = new mongoose.Schema({
     serialNumber: {
@@ -60,7 +60,8 @@ const droneSchema = new mongoose.Schema({
     state: {
         type: String,
         required: true,
-        enum: ['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING']
+        enum: ['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING'],
+        default: 'IDLE'
     },
     medications: {
         type: [],
