@@ -60,7 +60,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/drones"
+                                "$ref": "#/definitions/drone"
                             }
                         }
                     },
@@ -138,7 +138,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/medications"
+                                "$ref": "#/definitions/medication"
                             }
                         }
                     },

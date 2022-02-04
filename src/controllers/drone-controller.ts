@@ -10,7 +10,6 @@ import Medication from '../models/types/medication'
 class DroneController {
     
     private droneAvailabilityErrorMsg:string = ''
-    
     public create = async (req:Request,res:Response): Promise<DroneDoc> =>{
                try{
                  let drone = await DroneRepository.create(req.body)
