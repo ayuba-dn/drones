@@ -18,15 +18,12 @@
 <a  href="#installation">Installation</a>
 </li>
 
-<li><a  href="#prerequisites">Stack Used</a></li>
+<li><a  href="#technologies-used">Stack Used</a></li>
 
 </ul>
 
 </li>
 
-<li><a  href="#usage">Usage</a></li>
-
-<li><a  href="#roadmap">Roadmap</a></li>
 
 <li><a  href="#contact">Contact</a></li>
 
@@ -49,13 +46,13 @@
   
 ### ABOUT
 
-Clone this repository and open your terminal/command line app in the root folder
+An API/Service developed to manage drones which are designated for delivery. Contains endpoints for creating drones, checking drones availability, as well as loading drones with medications. This service has been deployed on Amazon EKS, It is accessible via the links below;
 
   
 
-1. Clone this repository and open your terminal/command line app in the root folder
+1. [API documentation link (based on openAPI)](http://aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com/docs/#/)
 
-2. Run the command below to start app container (accessible via localhost:4000)
+2. [API Base URL](http://aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com)
   
 
 ### INSTALLATION
