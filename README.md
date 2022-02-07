@@ -25,7 +25,7 @@
         ```docker compose up --build ```
    3. To run tests, open a new terminal/cmd and run the command below
   
-        ```docker exec -it ayuba-dauda-drones-1 npm run test ```     
+        ```docker exec -it drones-drones-1 npm run test ```     
    ###### NB: You Access API documentation at localhost:4000/docs
 
 #### Option B: Use this option only if you want to play around with the code on your local machine

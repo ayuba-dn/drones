@@ -14,7 +14,7 @@ services:
       depends_on:
         - mongo
       environment: 
-        DB_HOST: ayuba-dauda-mongo-1
+        DB_HOST: drones-mongo-1
         DB_PORT: 27017
         DB_NAME: drones
         DB_USER: droneuser
