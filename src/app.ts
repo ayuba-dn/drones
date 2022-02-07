@@ -15,7 +15,6 @@ class DroneService {
     constructor(){
         this.app = express()
         this.app.use(express.json())
-        this.app.use(express.static("public")); //needed to serve API docs
         this.app.use('/docs', swaggerUi.serve,
             swaggerUi.setup(this.swaggerDocument));
         this.initializeRoutes()
@@ -36,13 +35,13 @@ class DroneService {
              return res.status(200).send("Drone service running");
        })
 
-       this.app.get('*',async (req,res)=>{
-        throw new NotFoundError()
-       })
+    //    this.app.get('*',async (req,res)=>{
+    //     throw new NotFoundError()
+    //    })
 
-       this.app.post('*',async (req,res)=>{
-           throw new NotFoundError()
-       })
+    //    this.app.post('*',async (req,res)=>{
+    //        throw new NotFoundError()
+    //    })
 
         this.app.use(errorHandler)
     }

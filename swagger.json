@@ -50,18 +50,15 @@
                         "description": "drone data",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/drone"
+                            "$ref": "#/definitions/dronedata"
                         }
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "successful operation",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/drones"
-                            }
+                                "$ref": "#/definitions/droneschema"
                         }
                     },
                     "400": {
@@ -102,7 +99,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "successful operation",
                         "schema": {
                             "type": "array",
@@ -138,7 +135,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/medications"
+                                "$ref": "#/definitions/medication"
                             }
                         }
                     },
@@ -189,7 +186,7 @@
                      "example": 33
                 },
                 "model": {
-                    "type": "integer",
+                    "type": "string",
                     "example": "TD-44"
                 },
                 "weight": {
@@ -199,6 +196,10 @@
                 "battery": {
                     "type": "integer",
                     "example": 0.4
+                },
+                "state": {
+                    "type": "string",
+                    "example": "LOADING"
                 },
                 "medications":{
                     "type":"object",
@@ -210,16 +211,24 @@
             "type": "object",
             "properties": {
                 "serialNumber": {
-                     "type": "integer"
-                },
-                "model": {
-                    "type": "string"
-                },
-                "weight": {
-                    "type": "integer"
-                },
-                "battery": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": "747"
+               },
+               "model": {
+                   "type": "string",
+                   "example": "LW-343"
+               },
+               "weight": {
+                   "type": "integer",
+                   "example": 4.5
+               },
+               "battery": {
+                   "type": "integer",
+                   "example": 0.9
+               },
+               "state": {
+                "type": "string",
+                "example": "LOADING"
                 },
                 "medications": {
                         "type": "array",
@@ -229,7 +238,63 @@
                 }
             }
         },
-       
+        "dronedata": {
+            "type": "object",
+            "properties": {
+                "serialNumber": {
+                     "type": "integer",
+                     "example": "747"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "LW-343"
+                },
+                "weight": {
+                    "type": "integer",
+                    "example": 4.5
+                },
+                "battery": {
+                    "type": "integer",
+                    "example": 0.9
+                }
+               
+            }
+        },
+
+        "droneschema": {
+            "type": "object",
+            "properties": {
+                "serialNumber": {
+                     "type": "integer",
+                     "example": "747"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "LW-343"
+                },
+                "weight": {
+                    "type": "integer",
+                    "example": 4.5
+                },
+                "battery": {
+                    "type": "integer",
+                    "example": 0.9
+                },
+                "state": {
+                    "type": "string",
+                    "example": "IDLE"
+                },
+                "medications": {
+                    "type": "array",
+                    "example": []
+                },
+                "_id": {
+                    "type": "string",
+                    "example": "61fd0f3c565000253e005891"
+                }
+               
+            }
+        },
 
         "medication": {
             "type": "object",
@@ -260,15 +325,27 @@
         "InvalidResponse": {
             "type": "object",
             "properties": {
-                "statusCode": {
-                    "type": "integer",
-                    "example": 400
-                },
-                "message": {
-                    "type": "soemthing went wrong...."
-                }
+                "errors":{
+                   "type": "array",
+                   "items":{
+                        "$ref": "#/definitions/error"
+                   }
+                } 
             }
 
+        },
+        "error":{
+            "type":"object",
+            "properties": {
+                "message": {
+                    "type":"string",
+                    "example":"Error message"
+                },
+                "field": {
+                    "type":"string",
+                    "example":"error field if any"
+                }
+            }  
         }
 
         }

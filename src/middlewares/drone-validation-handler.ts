@@ -70,12 +70,12 @@ import {body,param} from 'express-validator'
         .withMessage("the drone model is required")
         .isString(),
     
-        body('state')
-        .notEmpty()
-        .withMessage("The drone state is required")
-        .isIn(['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING'])
-        .withMessage("Invalid drone state ")
-        .isString(),
+        // body('state')
+        // .notEmpty()
+        // .withMessage("The drone state is required")
+        // .isIn(['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING'])
+        // .withMessage("Invalid drone state ")
+        // .isString(),
     
         (req: Request,res: Response,next: NextFunction)=>{
             const errors = validationResult(req)

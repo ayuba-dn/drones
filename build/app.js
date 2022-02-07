@@ -32,17 +32,20 @@ class DroneService {
             });
         };
         //add all routes to the App here
-        this.initializeRoutes = () => {
-            new drone_routes_1.default(this.app);
+        this.initializeRoutes = () => __awaiter(this, void 0, void 0, function* () {
+            yield new drone_routes_1.default(this.app);
             this.app.route("/")
                 .get((req, res) => __awaiter(this, void 0, void 0, function* () {
                 return res.status(200).send("Drone service running");
             }));
-            this.app.all('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            this.app.get('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
+                throw new not_found_error_1.NotFoundError();
+            }));
+            this.app.post('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
                 throw new not_found_error_1.NotFoundError();
             }));
             this.app.use(error_handler_1.errorHandler);
-        };
+        });
         this.getAppInstance = () => {
             return this.app;
         };
@@ -58,9 +61,8 @@ class DroneService {
                 throw new database_connection_error_1.DatabaseConnectionError("Error Connecting DB");
             }
         });
-        this.app = express_1.default();
+        this.app = (0, express_1.default)();
         this.app.use(express_1.default.json());
-        this.app.use(express_1.default.static("public")); //needed to serve API docs
         this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(this.swaggerDocument));
         this.initializeRoutes();
     }

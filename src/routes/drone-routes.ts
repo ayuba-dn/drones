@@ -11,6 +11,7 @@ export default class DroneRoutes extends BaseRoute {
     }
     
     setUpRoutes() {
+
         this.app.route("/drones")
         .get(async (req: Request, res: Response,next:NextFunction) => {
             DroneController.getDrones().then(drone=>{
@@ -50,10 +51,7 @@ export default class DroneRoutes extends BaseRoute {
             }).catch(error=>{
                 next(error)
             })
-                
-                         
         })
-
 
         this.app.route("/drones/:droneId/battery")
         .get((req:Request,res:Response,next:NextFunction)=>{
@@ -61,9 +59,7 @@ export default class DroneRoutes extends BaseRoute {
                 res.status(200).send(drone)
             }).catch(error=>{
                 next(error)
-            })
-                
-                         
+            })                         
         })
 
         this.app.route("/drones/available/")
