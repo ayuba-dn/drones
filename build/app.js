@@ -13,14 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const drone_routes_1 = __importDefault(require("./routes/drone-routes"));
+const student_routes_1 = __importDefault(require("./routes/student-routes"));
+const course_routes_1 = __importDefault(require("./routes/course-routes"));
+const register_routes_1 = __importDefault(require("./routes/register-routes"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const error_handler_1 = require("./middlewares/error-handler");
-const not_found_error_1 = require("./helpers/errors/not-found-error");
 const database_connection_error_1 = require("./helpers/errors/database-connection-error");
 const swaggerUi = require("swagger-ui-express");
 const fs_1 = __importDefault(require("fs"));
-class DroneService {
+class CourseRegistration {
     constructor() {
         this.swaggerFile = (process.cwd() + "/swagger.json");
         this.swaggerData = fs_1.default.readFileSync(this.swaggerFile, 'utf8');
@@ -28,22 +29,24 @@ class DroneService {
         //starts the server on a given port
         this.start = (port) => {
             return this.app.listen(port, () => {
-                console.log(`Drone service is running on port >>>> ${port}`);
+                console.log(`course registration service is running on port >>>> ${port}`);
             });
         };
         //add all routes to the App here
         this.initializeRoutes = () => __awaiter(this, void 0, void 0, function* () {
-            yield new drone_routes_1.default(this.app);
+            yield new student_routes_1.default(this.app);
+            yield new course_routes_1.default(this.app);
+            yield new register_routes_1.default(this.app);
             this.app.route("/")
                 .get((req, res) => __awaiter(this, void 0, void 0, function* () {
-                return res.status(200).send("Drone service running");
+                return res.status(200).send("course registration service running");
             }));
-            this.app.get('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
-                throw new not_found_error_1.NotFoundError();
-            }));
-            this.app.post('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
-                throw new not_found_error_1.NotFoundError();
-            }));
+            //    this.app.get('*',async (req,res)=>{
+            //     throw new NotFoundError()
+            //    })
+            //    this.app.post('*',async (req,res)=>{
+            //        throw new NotFoundError()
+            //    })
             this.app.use(error_handler_1.errorHandler);
         });
         this.getAppInstance = () => {
@@ -67,4 +70,4 @@ class DroneService {
         this.initializeRoutes();
     }
 }
-exports.default = new DroneService();
+exports.default = new CourseRegistration();

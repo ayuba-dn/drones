@@ -26,7 +26,7 @@ const MedicationSchema = new mongoose_1.default.Schema({
         default: "default.png"
     }
 });
-const Medication = mongoose_1.default.model('Medication', MedicationSchema);
+// const Medication = mongoose.model('Medication',MedicationSchema)
 const droneSchema = new mongoose_1.default.Schema({
     serialNumber: {
         type: String,
@@ -49,7 +49,8 @@ const droneSchema = new mongoose_1.default.Schema({
     state: {
         type: String,
         required: true,
-        enum: ['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING']
+        enum: ['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING'],
+        default: 'IDLE'
     },
     medications: {
         type: [],

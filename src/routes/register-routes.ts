@@ -1,10 +1,10 @@
 import { BaseRoute } from "../helpers/base-route";
 import  {Request,Response,Application, NextFunction} from "express";
-import DroneController from "../controllers/drone-controller"
-import DroneValidation from "../middlewares/drone-validation-handler";
+import RegistrationController from "../controllers/registration-controller"
+import RegisterValidation from "../middlewares/register-validation-handler";
 
 
-export default class DroneRoutes extends BaseRoute {
+export default class RegisterRoutes extends BaseRoute {
    
     constructor(app: Application) {
         super(app);
@@ -12,47 +12,52 @@ export default class DroneRoutes extends BaseRoute {
     
     setUpRoutes() {
 
-        this.app.route("/drones")
+        this.app.route("/registrations")
         .get(async (req: Request, res: Response,next:NextFunction) => {
-            DroneController.getDrones().then(drone=>{
-                return res.status(201).send(drone)
+            RegistrationController.getRegistrations().then(student=>{
+                return res.status(201).send(student)
             }).catch(error=>{
                 next(error)
             })  
         })
-        .post(DroneValidation.create,(req:Request, res:Response,next:NextFunction)=>{
-                DroneController.create(req,res).then(drone=>{
-                    return res.status(201).send(drone)
+        .post(RegisterValidation.create,(req:Request, res:Response,next:NextFunction)=>{
+                RegistrationController.create(req,res).then(student=>{
+                    return res.status(201).send(student)
                 }).catch(error=>{
                     next(error)
                 })                
         })
-        .put(DroneValidation.create,async(req:Request, res:Response)=>{
-            const response = "drone updated";
+        .put(RegisterValidation.create,async(req:Request, res:Response)=>{
+            const response = "registration updated";
             return res.send(response);
         })
         .delete(async(req:Request, res:Response)=>{
-            const response = "TO DO>>>>>drone deleted";
+            const response = "TO DO>>>>>registration deleted";
             return res.send(response);
         })
 
 
-        this.app.route("/drones/:droneId/medications")
-        .post(DroneValidation.loadMedication,(req:Request,res:Response,next:NextFunction)=>{
-            DroneController.load(req,res).then(drone=>{
-                return res.status(200).send(drone)
+        this.app.route("/registrations/student")
+        .post(async (req: Request, res: Response,next:NextFunction) => {
+            RegistrationController.getOneRegistration(req, res).then(student=>{
+                return res.status(201).send(student)
             }).catch(error=>{
                 next(error)
-            })
-        })
-        .get(DroneValidation.getMedications,(req:Request,res:Response,next:NextFunction)=>{
-            DroneController.medications(req,res).then(medications=>{
-                return res.status(200).send(medications)
-            }).catch(error=>{
-                next(error)
-            })
+            })  
         })
 
+/*
+
+        this.app.route("/students/:id")
+        .get(async (req: Request, res: Response,next:NextFunction) => {
+            StudentController.getStudentById(req, res).then(student=>{
+                return res.status(201).send(student)
+            }).catch(error=>{
+                next(error)
+            })  
+        })
+
+/*
         this.app.route("/drones/:droneId/battery")
         .get((req:Request,res:Response,next:NextFunction)=>{
             DroneController.checkBattery(req,res).then(drone=>{
@@ -71,7 +76,7 @@ export default class DroneRoutes extends BaseRoute {
             })                         
         })
 
-        
+  */      
 
         return this.app;
     }

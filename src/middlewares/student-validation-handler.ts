@@ -7,68 +7,49 @@ import {body,param} from 'express-validator'
 
 
 
- class DroneValidations{
+ class StudentValidations{
     regex = new RegExp(/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/);
 
-    loadMedication = [
-        body('name')
-        .isString()
-        .notEmpty()
-        .withMessage("Medication Name is Required")
-        .matches(this.regex)
-        .withMessage("Please enter a valid name allowed only letters, numbers,- and _"),
-    
-        body('weight')
-        .isFloat()
-        .notEmpty()
-        .withMessage("THe Weight field is required"),
-    
-    
-        body('code')
-        .isString()
-        .notEmpty()
-        .withMessage("Medication Code is Required")
-        .matches(this.regex)
-        .withMessage("Please enter a valid code allowed only letters, numbers, and underscore"),
-    
-        body('image')
-        .isString(),
-    
-        param('droneId')
-        .isString()
-        .notEmpty()
-        .withMessage("drone ID is required"),
-    
-        (req: Request,res: Response,next: NextFunction)=>{
-            const errors = validationResult(req)
-            if(!errors.isEmpty()){
-                let errorsData: any = errors.array()
-                throw new RequestValidationError(errorsData)
-            }
-            next()
-        } 
-    ];
-
     create = [
-        body('weight')
+        body('surname')
         .notEmpty()
-        .withMessage("the drone weight is required")
-        .isFloat({ min: 0, max: 500 }),
-    
-        body('battery')
-        .notEmpty()
-        .withMessage("please enter battery capacity")
-        .isFloat(),
-    
-        body('serialNumber')
-        .notEmpty()
-        .isLength({ min: 0, max:100 })
-        .withMessage('Serial Number Should Not Exceed 100 characters'),
-    
-        body('model')
-        .notEmpty()
-        .withMessage("the drone model is required")
+        .withMessage("surname is required")
         .isString(),
+
+        body('firstname')
+        .notEmpty()
+        .withMessage("firstname is required")
+        .isString(),
+    
+        body('middlename')
+        .notEmpty()
+        .withMessage("middlename is required")
+        .isString(),
+
+        body('department')
+        .notEmpty()
+        .withMessage("department ID is required")
+        .isString(),
+
+        body('matricno')
+        .notEmpty()
+        .withMessage("Matriculation Number is required")
+        .isString(),
+
+        body('gender')
+        .notEmpty()
+        .withMessage("Gender is required")
+        .isString(),
+    
+        body('level')
+        .notEmpty()
+        .withMessage('Level is Required')
+        .isNumeric(),
+
+        body('yearofentry')
+        .notEmpty()
+        .isNumeric()
+        .withMessage('Entry Year is Required'),
     
         // body('state')
         // .notEmpty()
@@ -107,4 +88,4 @@ import {body,param} from 'express-validator'
 } 
 
 
-export default new DroneValidations()
+export default new StudentValidations()

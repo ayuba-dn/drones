@@ -1,5 +1,5 @@
 import DroneService from "./app"
-import periodicCheck from "./controllers/periodic-check"
+//import periodicCheck from "./controllers/periodic-check"
 import AppCredentials from "./helpers/app-credentials"
 
 
@@ -10,5 +10,5 @@ DroneService.connectDb(AppCredentials.dbUrl)
 DroneService.start(AppCredentials.port); 
 
 //Run Cron Job
-periodicCheck.start(AppCredentials.periodicCheckInterval); 
+//periodicCheck.start(AppCredentials.periodicCheckInterval); 
 

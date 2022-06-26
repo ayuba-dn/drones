@@ -9,28 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const registration_model_1 = require("../models/registration-model");
-class RegistrationRepository {
+const course_model_1 = require("../models/course-model");
+class CourseRepository {
     constructor() {
-        this.create = (RegistrationData) => __awaiter(this, void 0, void 0, function* () {
-            return new registration_model_1.Registration(RegistrationData).save();
-        });
-        this.load = (medication, droneId) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.findByIdAndUpdate(droneId, { $push: { medications: medication } }, { new: true });
+        this.create = (CourseData) => __awaiter(this, void 0, void 0, function* () {
+            return new course_model_1.Course(CourseData).save();
         });
         this.getAll = () => __awaiter(this, void 0, void 0, function* () {
-            return Drone.find({});
+            return course_model_1.Course.find({});
         });
-        this.findOne = (droneId) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.findById(droneId);
-        });
-        this.findOneWithProjection = (droneId, projection) => __awaiter(this, void 0, void 0, function* () {
-            console.log(projection);
-            return Drone.findById(droneId).select(projection);
+        this.findWithID = (courseid) => __awaiter(this, void 0, void 0, function* () {
+            return course_model_1.Course.findById(courseid);
         });
         this.find = (query) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.find(query);
+            return course_model_1.Course.find(query);
         });
     }
 }
-exports.default = new RegistrationRepository();
+exports.default = new CourseRepository();

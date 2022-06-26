@@ -1,7 +1,7 @@
 {
-  "name": "ayuba-dauda",
+  "name": "atilola-oyediji",
   "version": "1.0.0",
-  "description": "drone service",
+  "description": "course registration service",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://oauth:glpat-mMiCfpvfxxYzVWeZQeZj@gitlab.com/musala-coding-tasks-solutions/ayuba-dauda.git"
   },
-  "author": "Ayuba Dauda",
+  "author": "Atilola Oyediji",
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/musala-coding-tasks-solutions/ayuba-dauda/issues"
@@ -35,6 +35,7 @@
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.14.0",
     "jest": "^27.4.7",
+    "mongodb": "^4.7.0",
     "mongoose": "^6.1.8",
     "node-cron": "^3.0.0",
     "swagger-jsdoc": "^6.1.0",

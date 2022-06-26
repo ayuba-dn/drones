@@ -15,21 +15,25 @@ class RegistrationRepository {
         this.create = (RegistrationData) => __awaiter(this, void 0, void 0, function* () {
             return new registration_model_1.Registration(RegistrationData).save();
         });
-        this.load = (medication, droneId) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.findByIdAndUpdate(droneId, { $push: { medications: medication } }, { new: true });
-        });
+        /*
+             
+             load = async (registration: RegistrationType, studentid: String): Promise<RegistrationDoc | null> => {
+        
+               return Registration.findByIdAndUpdate(studentid,{ $push: { medications: medication } },{new: true});
+             }
+         */
         this.getAll = () => __awaiter(this, void 0, void 0, function* () {
-            return Drone.find({});
+            return registration_model_1.Registration.find({});
         });
-        this.findOne = (droneId) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.findById(droneId);
+        this.findOne = (RegistrationId) => __awaiter(this, void 0, void 0, function* () {
+            return registration_model_1.Registration.findById(RegistrationId);
         });
-        this.findOneWithProjection = (droneId, projection) => __awaiter(this, void 0, void 0, function* () {
+        this.findOneWithMatric = (RegistrationId, projection) => __awaiter(this, void 0, void 0, function* () {
             console.log(projection);
-            return Drone.findById(droneId).select(projection);
+            return registration_model_1.Registration.findById(RegistrationId).select(projection);
         });
         this.find = (query) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.find(query);
+            return registration_model_1.Registration.find(query);
         });
     }
 }

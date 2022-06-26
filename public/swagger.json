@@ -9,14 +9,14 @@
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "ayuba-dauda",
+		"title": "atilola-oyediji",
 		"version": "1.0.0",
-		"description": "drone service",
+		"description": "course registration service",
 		"license": {
 			"name": "MIT"
 		},
 		"contact": {
-			"name": "Ayuba Dauda"
+			"name": "Atilola Oyediji"
 		}
 	},
 	"openapi": "3.0.0",

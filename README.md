@@ -1,5 +1,5 @@
 
-## Drones API
+## Courses API
 
   
 
@@ -46,39 +46,12 @@
   
 ### ABOUT
 
-An API/Service developed to manage drones which are designated for delivery. Contains endpoints for creating drones, checking drones availability, as well as loading drones with medications. This service has been deployed on Amazon EKS, It is accessible via the links below;
-
-  
-
-1. [API documentation link (based on openAPI)](http://aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com/docs/#/)
-
-2. [API Base URL](http://aa75e59c5b52245f78bca84a87c33713-1730258908.us-east-1.elb.amazonaws.com)
-3.  [Drones Periodic Battery Check Logs (On Kibana Dashboard)](http://a3d404b52b5bb4a22a919777ed2e1e32-1805370564.us-east-1.elb.amazonaws.com:5601/app/kibana#/discover)
+An API/Service developed to manage course registration. The API contains endpoints for registering new students, creating new courses and also for registering courses by active students.
   
 
 ### INSTALLATION
 
-  
-
-#### Option A: Using <a href="https://www.docker.com/">Docker </a>
-
-  
-
-1. Clone this repository and open your terminal/command line app in the root folder
-
-2. Run the command below to start app container (accessible via localhost:4000)
-
-```docker compose up --build ```
-
-3. To run tests, open a new terminal/cmd and run the command below
-
-```docker exec -it drones-drones-1 npm run test ```
-
-###### NB: You Access API documentation at localhost:4000/docs
-
-  
-
-#### Option B: Use this option only if you want to play around with the code on your local machine
+#### Use this option only if you want to play around with the code on your local machine
 
   
 
@@ -159,13 +132,11 @@ The following are the major tools that have been utilized for developing and dep
 
   
 
-Ayuba Dauda 
-Email: mailtoayuba@gmail.com
-LinkedIn: mailtoayuba@gmail.com
- Twitter: [@ayuba-dn](https://twitter.com/ayuba-dn)  
+Atilola Oyediji 
+Email: atilola.oyediji@gmail.com
+LinkedIn: Atilola Oyediji
+ Twitter: (https://twitter.com/atilolaoyediji)  
 
   
-
-Project Link: [https://oauth:glpat-mMiCfpvfxxYzVWeZQeZj@gitlab.com/musala-coding-tasks-solutions/ayuba-dauda.git](https://oauth:glpat-mMiCfpvfxxYzVWeZQeZj@gitlab.com/musala-coding-tasks-solutions/ayuba-dauda.git)
 
 :scroll: **END**

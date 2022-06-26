@@ -9,28 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const registration_model_1 = require("../models/registration-model");
-class RegistrationRepository {
+const student_model_1 = require("../models/student-model");
+class StudentRepository {
     constructor() {
-        this.create = (RegistrationData) => __awaiter(this, void 0, void 0, function* () {
-            return new registration_model_1.Registration(RegistrationData).save();
-        });
-        this.load = (medication, droneId) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.findByIdAndUpdate(droneId, { $push: { medications: medication } }, { new: true });
+        this.create = (StudentData) => __awaiter(this, void 0, void 0, function* () {
+            return new student_model_1.Student(StudentData).save();
         });
         this.getAll = () => __awaiter(this, void 0, void 0, function* () {
-            return Drone.find({});
+            return student_model_1.Student.find({});
         });
-        this.findOne = (droneId) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.findById(droneId);
+        this.findWithMatric = (matricno) => __awaiter(this, void 0, void 0, function* () {
+            return student_model_1.Student.findOne({ matricno: matricno });
         });
-        this.findOneWithProjection = (droneId, projection) => __awaiter(this, void 0, void 0, function* () {
-            console.log(projection);
-            return Drone.findById(droneId).select(projection);
+        this.findByUserId = (studentid) => __awaiter(this, void 0, void 0, function* () {
+            return student_model_1.Student.findById(studentid);
         });
         this.find = (query) => __awaiter(this, void 0, void 0, function* () {
-            return Drone.find(query);
+            return student_model_1.Student.find(query);
+        });
+        this.updatelevel = (studentid, level) => __awaiter(this, void 0, void 0, function* () {
+            return student_model_1.Student.findOneAndUpdate({ _id: studentid }, { level: level }, { new: true });
         });
     }
 }
-exports.default = new RegistrationRepository();
+exports.default = new StudentRepository();

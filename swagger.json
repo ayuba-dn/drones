@@ -2,11 +2,11 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Drone Service API Documentation",
+        "description": "Course Registration API",
         "version": "1.0.0",
-        "title": "Drones API",
+        "title": "Course API",
         "contact": {
-            "email": "mailtoayuba@gmail.com"
+            "email": "atilola.oyediji@gmail.com"
         }
        
     },
@@ -14,10 +14,10 @@
     "host": "localhost:4000",
     "basePath": "",
     "paths" : {
-        "/drones" : {
+        "/departments" : {
             "get" : {
-                "summary" : "Get all the drones",
-                "description": "Get all the drones",
+                "summary" : "Get all departments in an institution",
+                "description": "Get all courses",
                 "produces": ["application/json"],
                 "parameters": [],
                 "responses": {
@@ -26,7 +26,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/drone"
+                                "$ref": "#/definitions/department"
                             }
                         }
                     },
@@ -39,18 +39,18 @@
                 }
             },
             "post" : {
-                "summary" : "Save the drone",
-                "description": "Save the drone",
+                "summary" : "Add New Department",
+                "description": "Save a new department",
                 "produces": ["application/json"],
                 "consumes": ["application/json"],
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "drone data",
+                        "description": "course registration data",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dronedata"
+                            "$ref": "#/definitions/department"
                         }
                     }
                 ],
@@ -58,7 +58,38 @@
                     "201": {
                         "description": "successful operation",
                         "schema": {
-                                "$ref": "#/definitions/droneschema"
+                                "$ref": "#/definitions/department"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "update department information",
+                "description": "change name or faculty a department belongs",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "student data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/department"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/department"
                         }
                     },
                     "400": {
@@ -70,41 +101,20 @@
                 }
             }
         },
-       
-       
 
-        "/drones/{id}/medications" : {
-            "post" : {
-                "summary" : "Loads the drone with medications",
-                "description": "Update the drones medications",
+        "/students" : {
+            "get" : {
+                "summary" : "Get all the students",
+                "description": "Get all the courses",
                 "produces": ["application/json"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "drone id that needs to be loaded",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "medication object",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "$ref": "#/definitions/medication"
-                           
-                        }
-                    }
-                ],
+                "parameters": [],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "successful operation",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/drone"
+                                "$ref": "#/definitions/student"
                             }
                         }
                     },
@@ -116,15 +126,80 @@
                     }
                 }
             },
+            "post" : {
+                "summary" : "Add New Student",
+                "description": "Save a new student",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "course registration data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/student"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/student"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update Level of individual student e.g. 200 to 300",
+                "description": "change student level",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "student data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/student"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/student"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/students/{matricno}" : {        
             "get" : {
-                "summary" : "get the medications loaded on the drone",
-                "description": "all medications loaded on the drone specified are returned",
+                "summary" : "get a student basic information by matriculation number",
+                "description": "get single student information",
                 "produces": ["application/json"],
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "matricno",
                         "in": "path",
-                        "description": "drone id that needs to be retrieved",
+                        "description": "matric number (unique) for individual student",
                         "required": true,
                         "type": "string"
                     }
@@ -135,7 +210,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/medication"
+                                "$ref": "#/definitions/student"
                             }
                         }
                     },
@@ -149,18 +224,27 @@
             }
         },
 
-        "/drones/available" : {
+"/students/{id}" : {        
             "get" : {
-                "summary" : "Returns drones available for loading",
-                "description": "Drones whose weight and battery levels are within the required loading limits are returned",
+                "summary" : "get a student basic information by id",
+                "description": "get single student information",
                 "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "unique objectid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/drones"
+                                "$ref": "#/definitions/student"
                             }
                         }
                     },
@@ -172,155 +256,293 @@
                     }
                 }
             }
-           
-        }
+        },
 
-       
+        "/courses" : {
+            "get" : {
+                "summary" : "Get all courses",
+                "description": "Get all the courses",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/course"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Add New Course",
+                "description": "Save a new course",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "course registration data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/course"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/course"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+
+
+        "/registrations" : {
+            "get" : {
+                "summary" : "Get all registrations",
+                "description": "Get all registered students",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/registration"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Add New Registration per semester",
+                "description": "register a new course list",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "course registration data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/registration"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/registration"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/registrations/student" : {
+            "post" : {
+                "summary" : "Get Student's Registration Based on Matric Number and Session",
+                "description": "Get a New Registration",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "registration retrieved data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/registrations"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/registration"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }    
     }, 
     "definitions": {
-        "drones": {
-            "type": "object",
-            "properties": {
-                "serialNumber": {
-                     "type": "integer",
-                     "example": 33
-                },
-                "model": {
-                    "type": "string",
-                    "example": "TD-44"
-                },
-                "weight": {
-                    "type": "integer",
-                    "example": 4.9
-                },
-                "battery": {
-                    "type": "integer",
-                    "example": 0.4
-                },
-                "state": {
-                    "type": "string",
-                    "example": "LOADING"
-                },
-                "medications":{
-                    "type":"object",
-                    "$ref":"#/definitions/medication"
-                }           
-             }
-        },
-        "drone": {
-            "type": "object",
-            "properties": {
-                "serialNumber": {
-                    "type": "integer",
-                    "example": "747"
-               },
-               "model": {
-                   "type": "string",
-                   "example": "LW-343"
-               },
-               "weight": {
-                   "type": "integer",
-                   "example": 4.5
-               },
-               "battery": {
-                   "type": "integer",
-                   "example": 0.9
-               },
-               "state": {
-                "type": "string",
-                "example": "LOADING"
-                },
-                "medications": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/medication"
-                        }
-                }
-            }
-        },
-        "dronedata": {
-            "type": "object",
-            "properties": {
-                "serialNumber": {
-                     "type": "integer",
-                     "example": "747"
-                },
-                "model": {
-                    "type": "string",
-                    "example": "LW-343"
-                },
-                "weight": {
-                    "type": "integer",
-                    "example": 4.5
-                },
-                "battery": {
-                    "type": "integer",
-                    "example": 0.9
-                }
-               
-            }
-        },
-
-        "droneschema": {
-            "type": "object",
-            "properties": {
-                "serialNumber": {
-                     "type": "integer",
-                     "example": "747"
-                },
-                "model": {
-                    "type": "string",
-                    "example": "LW-343"
-                },
-                "weight": {
-                    "type": "integer",
-                    "example": 4.5
-                },
-                "battery": {
-                    "type": "integer",
-                    "example": 0.9
-                },
-                "state": {
-                    "type": "string",
-                    "example": "IDLE"
-                },
-                "medications": {
-                    "type": "array",
-                    "example": []
-                },
-                "_id": {
-                    "type": "string",
-                    "example": "61fd0f3c565000253e005891"
-                }
-               
-            }
-        },
-
-        "medication": {
+        "department": {
             "type": "object",
             "properties": {
                 "name": {
-                     "type": "string",
-                     "example": "paracetamol"
+                    "type": "string",
+                    "example": "Political Science"
+               },
+               "faculty": {
+                   "type": "string",
+                   "example": "Sciences"
+               },
+               "isactive": {
+                   "type": "boolean",
+                   "example": true
+               }
+
+                }
+        },
+        "student": {
+            "type": "object",
+            "properties": {
+                "surname": {
+                    "type": "string",
+                    "example": "Oyediji"
+               },
+               "firstname": {
+                   "type": "string",
+                   "example": "Atilola"
+               },
+               "middlename": {
+                   "type": "string",
+                   "example": "Joshua"
+               },
+               "department": {
+                   "type": "string",
+                   "example": "Computer Engineering"
+               },
+               "matricno": {
+                "type": "string",
+                "example": "CSC/2011/121"
                 },
-                "code": {
-                    "weight": "string",
-                    "example": "TC-89"
+                "gender": {
+                        "type": "string",
+                        "example": "Male"
+                        },
+                "level": {
+                        "type": "integer",
+                        "example": "200"
+                        },
+                "yearofentry": {
+                        "type": "integer",
+                        "example": "2012"
+                        }
+                }
+        },
+        "course": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "example": "Software Engineering"
+               },
+               "code": {
+                   "type": "string",
+                   "example": "SEE 112"
+               },
+               "departments": {
+                   "type": "array",
+                   "example": ["Computer Engineering", "Electrical Engineering", "Computer Science and Mathematics"]
+               },
+               "level": {
+                "type": "integer",
+                "example": "100"
                 },
-                "weight": {
-                    "type": "integer",
-                    "example": 5.7
+                "catcap": {
+                "type": "integer",
+                "example": "30"
                 },
-                "image": {
-                    "type": "file"
+                "examcap": {
+                "type": "integer",
+                "example": "70"
+                },
+                "semester": {
+                        "type": "string",
+                        "example": "harmattan"
+                },
+                "units": {
+                        "type": "integer",
+                        "example": "2"
+                },
+                "type": {
+                        "type": "string",
+                        "example": "elective"
                 }
             }
         },
-        "medications": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/drone"
-            }
+        "registration": {
+            "type": "object",
+            "properties": {
+                "registrationNumber": {
+                    "type": "string",
+                    "example": "RH2122"
+               },
+               "registrant": {
+                   "type": "string",
+                   "example": "6f9e30b47084d971a7c820ffb"
+               },
+               "session": {
+                   "type": "string",
+                   "example": 2012
+               },
+               "semester": {
+                "type": "string",
+                "example": "Rain"
+                },
+                "courses": {
+                        "type": "array",
+                        "example": ["6dhgsgsggs", "436sdgygsygysdgygdy"]
+                        }
+                }
+        },
+       "registrations": {
+            "type": "object",
+            "properties": {
+               "registrant": {
+                   "type": "string",
+                   "example": "6f9e30b47084d971a7"
+               },
+            "session": {
+                   "type": "string",
+                   "example": "2012/2013"
+               }
+
+               
+                }
         },
         "InvalidResponse": {
             "type": "object",
